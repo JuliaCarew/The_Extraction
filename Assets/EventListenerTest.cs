@@ -2,20 +2,21 @@ using UnityEngine;
 
 public class EventListenerTest : MonoBehaviour
 {
-    [SerializeField] EventSystem_Void playerDiedEventChannel;
+    [SerializeField] EventSystem_Void eventChannel;
+    [SerializeField] private string debugMessage = "Event received!";
 
-    private void Awake()
+    private void OnEnable()
     {
-        playerDiedEventChannel.OnEventRaised += PlayerDiedResponse;
+        eventChannel.OnEventRaised += OnEventRaised;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        playerDiedEventChannel.OnEventRaised -= PlayerDiedResponse;
+        eventChannel.OnEventRaised -= OnEventRaised;
     }
 
-    private void PlayerDiedResponse()
+    private void OnEventRaised()
     {
-        Debug.Log("Player has died! Event received in EventListenerTest.");
+        Debug.Log(debugMessage);
     }
 }

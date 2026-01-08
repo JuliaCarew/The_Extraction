@@ -269,7 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 394b89d1a0b6b2f41837935d4a4077a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDiedEventChannel: {fileID: 11400000, guid: 151a572bcc7cec24c95f5f91ed017bcb, type: 2}
+  eventChannel: {fileID: 11400000, guid: 58978e60e8986334e9dd45930d1bc63d, type: 2}
+  debugMessage: player died
 --- !u!4 &788395140
 Transform:
   m_ObjectHideFlags: 0
@@ -451,7 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc63e738ef6586b4485667f68ceac737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDiedEventChannel: {fileID: 11400000, guid: 151a572bcc7cec24c95f5f91ed017bcb, type: 2}
+  playerDiedEventChannel: {fileID: 11400000, guid: 58978e60e8986334e9dd45930d1bc63d, type: 2}
 --- !u!4 &1950681622
 Transform:
   m_ObjectHideFlags: 0
