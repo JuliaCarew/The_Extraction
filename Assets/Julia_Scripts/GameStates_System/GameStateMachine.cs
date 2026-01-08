@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class GameStateMachine : MonoBehaviour
+public class GameStateMachine : SingletonBase<GameStateMachine>
 {
     [Header("States")]
     [SerializeField] private List<GameStateSO> availableStates;
@@ -12,6 +12,8 @@ public class GameStateMachine : MonoBehaviour
 
     private void Awake()
     {
+        base.Awake();
+
         states = new Dictionary<GameState, IState>();
 
         foreach (var state in availableStates)
