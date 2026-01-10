@@ -7,6 +7,8 @@ public class EnemyPatrol : MonoBehaviour
     private int targetPoint = 0;
 
     [SerializeField] private float speed = 2f;
+    [SerializeField] private float rotationSpeed = 5f;
+    private Vector3 movementVector;
 
     private void Start()
     {
@@ -15,12 +17,24 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position == patrolPoints[targetPoint].position)
+        movementVector = new Vector3(patrolPoints[targetPoint].position.x, transform.position.y, patrolPoints[targetPoint].position.z);
+        if (transform.position == movementVector)
         {
             IncreaseTarget();
         }
-        transform.position = Vector3.MoveTowards(transform.position, patrolPoints[targetPoint].position, speed * Time.deltaTime);
-        transform.LookAt(patrolPoints[targetPoint].position);
+
+        transform.position = Vector3.MoveTowards(transform.position, movementVector, speed * Time.deltaTime);
+
+
+        RotateTowardsTarget();
+    }
+
+    private void RotateTowardsTarget()
+    {
+        Vector3 direction = patrolPoints[targetPoint].position - transform.position;
+        direction.y = 0;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
     private void IncreaseTarget()

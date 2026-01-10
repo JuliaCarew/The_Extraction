@@ -22,6 +22,10 @@ public class InteractableController : MonoBehaviour
                 ? hit.collider.GetComponent<IInteract>() 
                 : null;
         }
+        else
+        {
+            currentInteractable = null;
+        }
     }
 
     private void OnInteract()
@@ -31,7 +35,14 @@ public class InteractableController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        if (currentInteractable != null)
+        {
+            Gizmos.color = Color.green;
+        }
+        else
+        {
+            Gizmos.color = Color.red;
+        }
         Gizmos.DrawRay(transform.position, transform.forward * detectionDistance);
     }
 }
