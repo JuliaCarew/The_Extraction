@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class HideInteraction : IInteract
+public class HideInteraction : BaseInteractable
 {
-    public void Interact()
+    public override void Interact()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Interacting with Trash can for example.");
     }
 }

@@ -1,9 +1,9 @@
 
 
-public class KillInteraction : IInteract
+public class KillInteraction : BaseInteractable
 {
-    public void Interact()
+    public override void Interact()
     {
-        throw new System.NotImplementedException();
+
     }
 }
