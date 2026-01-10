@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerMovementActions
     // Event that are triggered when input activity is detected
 
     public event Action<Vector2> MoveInputEvent;
+    public event Action<InputAction.CallbackContext> InteractInputEvent;
 
     private Inputs inputs;
 
@@ -31,6 +32,14 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerMovementActions
         MoveInputEvent?.Invoke(context.ReadValue<Vector2>());
     }
 
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            InteractInputEvent?.Invoke(context);
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,4 +51,6 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerMovementActions
     {
         
     }
+
+    
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -64,15 +65,23 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = new Vector2(inputVector.x, inputVector.y);
     }
+
+    void InteractWithObject(InputAction.CallbackContext c) 
+    {
+        // TODO:  Logic for interacting with objects
+        Debug.Log("Interact"); 
+    }
      
     private void OnEnable()
     {
         inputManager.MoveInputEvent += SetMoveInput; 
+        inputManager.InteractInputEvent += InteractWithObject; 
     }
 
     private void OnDisable()
     {
         inputManager.MoveInputEvent -= SetMoveInput; 
+        inputManager.InteractInputEvent -= InteractWithObject;
     }
 
 
