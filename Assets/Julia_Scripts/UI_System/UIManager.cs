@@ -15,7 +15,7 @@ public class UIManager : SingletonBase<UIManager>
         foreach (var screen in screens)
         {
             screenDict[screen.name.ToLower()] = screen;
-            screen.Hide(); // start hidden
+            screen.Hide(); // start hidde
         }
     }
 
