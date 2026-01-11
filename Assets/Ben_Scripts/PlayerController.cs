@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.UI.Image;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,7 +9,11 @@ public class PlayerController : MonoBehaviour
 
     public float movSpeed = 4f;
     public Rigidbody rb;
-    private bool canMove = true; 
+    private bool canMove = true;
+    private bool isHidden = false;
+
+    private MeshRenderer playerMesh;    
+    private MeshRenderer[] meshRenderers;
 
     // Interaction Variable
     [SerializeField] private BaseInteractable bInteractable = null;
@@ -28,7 +32,10 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        playerMesh = GetComponent<MeshRenderer>();
+
+        meshRenderers = GetComponentsInChildren<MeshRenderer>(true);
+
     }
 
     // Update is called once per frame
@@ -98,18 +105,43 @@ public class PlayerController : MonoBehaviour
 
     public void HideInObject() 
     {
-        //canMove = false;
-        this.gameObject.layer = LayerMask.NameToLayer("Hidden");
+        if (!isHidden)
+        {
+            this.gameObject.layer = LayerMask.NameToLayer("Hidden");
+            canMove = false;
+            isHidden = true;
+            playerMesh.enabled = false;
+
+            foreach (MeshRenderer mr in meshRenderers)
+                mr.enabled = false;
+        }        
+    }
+
+    public void StopHidding() 
+    {
+        this.gameObject.layer = LayerMask.NameToLayer("Player");
+        canMove = true;
+        isHidden = false;
+        playerMesh.enabled = true;
+
+        foreach (MeshRenderer mr in meshRenderers)
+            mr.enabled = true;
     }
 
     void InteractWithObject(InputAction.CallbackContext c) 
     {
         // TODO:  Logic for interacting with objects
-        Debug.Log("Interact"); 
-
-        if(bInteractable != null) 
+        Debug.Log("Interact");
+        if (!isHidden)
         {
-            bInteractable.Interact(); 
+            if (bInteractable != null)
+            {
+                bInteractable.Interact();
+            }
+        }
+        else 
+        {
+            StopHidding(); 
         }
     }
 
