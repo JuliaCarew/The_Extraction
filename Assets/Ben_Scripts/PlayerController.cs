@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.UI.Image;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,7 +9,12 @@ public class PlayerController : MonoBehaviour
 
     public float movSpeed = 4f;
     public Rigidbody rb;
+    private bool canMove = true; 
 
+    // Interaction Variable
+    [SerializeField] private BaseInteractable bInteractable = null;
+    public float rayDistance = 3f;
+    public LayerMask interactableLayer;
 
     // Rotation variables
     [Header("Rotation")]
@@ -28,12 +34,35 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(DetectingInteractable(out RaycastHit hit)) 
+        {
+            if(bInteractable == null) 
+            {
+                try
+                {
+                    bInteractable = hit.collider.GetComponent<BaseInteractable>();                    
+                }
+                catch (System.Exception e) 
+                {
+                    Debug.Log("No Base interactable found.  " + e); 
+                }
+            }
+        }
+        else 
+        {
+            if(bInteractable != null) 
+            {
+                bInteractable = null; 
+            }
+        }
     }
 
     private void FixedUpdate()
-    {       
-        ApplyMovement(); 
+    {
+        if (canMove)
+        {
+            ApplyMovement();
+        }
     }
 
     public void ApplyMovement() 
@@ -66,11 +95,29 @@ public class PlayerController : MonoBehaviour
         moveInput = new Vector2(inputVector.x, inputVector.y);
     }
 
+
+    public void HideInObject() 
+    {
+        //canMove = false;
+        this.gameObject.layer = LayerMask.NameToLayer("Hidden");
+    }
+
     void InteractWithObject(InputAction.CallbackContext c) 
     {
         // TODO:  Logic for interacting with objects
         Debug.Log("Interact"); 
+
+        if(bInteractable != null) 
+        {
+            bInteractable.Interact(); 
+        }
     }
+
+    private bool DetectingInteractable(out RaycastHit hit) 
+    {
+        return Physics.Raycast(transform.position, transform.forward, out hit, rayDistance, interactableLayer);
+    }
+
      
     private void OnEnable()
     {
@@ -82,6 +129,14 @@ public class PlayerController : MonoBehaviour
     {
         inputManager.MoveInputEvent -= SetMoveInput; 
         inputManager.InteractInputEvent -= InteractWithObject;
+    }
+
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position,
+            transform.position + transform.forward * rayDistance);
     }
 
 

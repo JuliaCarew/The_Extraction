@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 515032126}
   - component: {fileID: 515032125}
   - component: {fileID: 515032124}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,7 +653,7 @@ GameObject:
   - component: {fileID: 1797296580}
   - component: {fileID: 1797296579}
   - component: {fileID: 1797296578}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -675,6 +675,11 @@ MonoBehaviour:
   inputManager: {fileID: 1383466803}
   movSpeed: 4
   rb: {fileID: 1797296579}
+  bInteractable: {fileID: 0}
+  rayDistance: 3
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 64
   rotSpeed: 2
   turnSmoothTime: 0.1
   moveInput: {x: 0, y: 0}
@@ -1024,7 +1029,8 @@ GameObject:
   - component: {fileID: 2069999354}
   - component: {fileID: 2069999353}
   - component: {fileID: 2069999352}
-  m_Layer: 0
+  - component: {fileID: 2069999356}
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1122,6 +1128,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2069999356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069999351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 092a395e988ddc34d8d086c926d2568c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionPrompt: 
 --- !u!1 &2090116394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,7 +1153,8 @@ GameObject:
   - component: {fileID: 2090116397}
   - component: {fileID: 2090116396}
   - component: {fileID: 2090116395}
-  m_Layer: 0
+  - component: {fileID: 2090116399}
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1230,6 +1250,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2090116399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090116394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d67154ef00ac324eb3465380fda8451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionPrompt: Press H to hide
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
