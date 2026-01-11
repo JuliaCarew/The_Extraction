@@ -4,12 +4,12 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public GameObject player; 
-    public PlayerController playerController;
+    public PlayerMovement playerController;
     private string spawnPointName;
 
     private void Awake()
     {
-        playerController = FindFirstObjectByType<PlayerController>();
+        playerController = FindFirstObjectByType<PlayerMovement>();
     }
     
 
