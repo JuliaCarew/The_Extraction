@@ -673,13 +673,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dc33d8f82ee0ef48a065bcd6aa13408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputManager: {fileID: 1383466803}
-  movSpeed: 4
-  rb: {fileID: 1797296579}
-  canMove: 1
-  rotSpeed: 2
-  turnSmoothTime: 0.1
-  moveInput: {x: 0, y: 0}
 --- !u!54 &1797296579
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -819,6 +812,7 @@ MonoBehaviour:
     m_Bits: 256
   playerController: {fileID: 1797296578}
   currentInteractable: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &1925408443
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,7 +1153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092a395e988ddc34d8d086c926d2568c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionPrompt: 
+  interactionText: kill
 --- !u!1 &2090116394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,7 +1275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d67154ef00ac324eb3465380fda8451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionPrompt: Press H to hide
+  interactionText: hide
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
