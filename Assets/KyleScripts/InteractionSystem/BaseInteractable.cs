@@ -8,7 +8,7 @@ public abstract class BaseInteractable : MonoBehaviour, IInteract
         throw new System.NotImplementedException();
     }
 
-    protected virtual string GetInteractionPrompt()
+    public virtual string GetInteractionPrompt()
     {
         return interactionText;
     }

@@ -9,4 +9,9 @@ public class HideInteraction : BaseInteractable{
         interaction.Hide();
         Debug.Log("Interacting with Trash can for example.");
     }
+
+    public override string GetInteractionPrompt()
+    {
+        return interactionText;
+    }
 }

@@ -8,4 +8,9 @@ public class KillInteraction : BaseInteractable
         victim.Kill();
         Debug.Log("KILL!!!"); 
     }
+
+    public override string GetInteractionPrompt()
+    {
+        return interactionText;
+    }
 }

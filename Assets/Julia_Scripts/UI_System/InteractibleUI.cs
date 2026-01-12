@@ -12,7 +12,7 @@ public class InteractibleUI : MonoBehaviour
         var interactible = interactableController.currentInteractable;
         if(interactible != null)
         {
-            keyText.text = interactible.InteractionText;
+            keyText.text = interactible.GetInteractionPrompt();
             keyText.gameObject.SetActive(true);
         }
         else
