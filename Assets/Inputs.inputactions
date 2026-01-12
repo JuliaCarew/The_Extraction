@@ -92,6 +92,17 @@
                 },
                 {
                     "name": "",
+                    "id": "96dbee93-80e2-4092-9e2b-8878042d43c4",
+                    "path": "<Joystick>/stick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4591bdeb-10b0-46ac-a54a-6ac9623ec1a5",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -103,8 +114,30 @@
                 },
                 {
                     "name": "",
+                    "id": "ca89deb5-8e76-4fad-97ae-4113f264a939",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "acaa1ec7-2a85-4511-ae83-20be83bfe116",
                     "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5bbad51e-026f-46ee-9c1c-526b745bb27b",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

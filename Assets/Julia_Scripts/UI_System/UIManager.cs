@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using UnityEngine.InputSystem;
+// changing menu state needs to change game state too
 public enum UIState
 {
     None,
@@ -48,6 +49,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // put pause input logic here for now
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowPause();
+        }
+    }
+
     public void SetState(UIState newState)
     {
         // Hide current state screen
@@ -92,31 +102,37 @@ public class UIManager : MonoBehaviour
     public void ShowMainMenu()
     {
         SetState(UIState.MainMenu);
+        GameStateMachine.Instance.ChangeState(GameState.Menu);
     }
 
     public void ShowGameplay()
     {
         SetState(UIState.Gameplay);
+        GameStateMachine.Instance.ChangeState(GameState.Gameplay);
     }
 
     public void ShowPause()
     {
         SetState(UIState.Pause);
+        GameStateMachine.Instance.ChangeState(GameState.Paused);
     }
 
     public void ShowGameOver()
     {
         SetState(UIState.GameOver);
+        
     }
 
     public void ShowSettings()
     {
         SetState(UIState.Settings);
+        GameStateMachine.Instance.ChangeState(GameState.Settings);
     }
 
     public void ShowResults()
     {
         SetState(UIState.Results);
+        GameStateMachine.Instance.ChangeState(GameState.Results);
     }
 
     public void QuitGame()

@@ -6,7 +6,8 @@ public class MenuState : GameStateSO
     public override void Enter()
     {
         Time.timeScale = 0f;
-        GameStateEvents.RaiseGameStarted();
+        GameStateEvents.Instance.RaiseGameStarted();
+        Debug.Log("Entered MainMenu state");
     }
 
     public override void Exit()

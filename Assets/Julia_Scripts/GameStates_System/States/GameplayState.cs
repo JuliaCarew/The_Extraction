@@ -6,7 +6,8 @@ public class GameplayState : GameStateSO
     public override void Enter()
     {
         Time.timeScale = 1f;
-        GameStateEvents.RaiseGameResumed();
+        GameStateEvents.Instance.RaiseGameResumed();
+        Debug.Log("entered Gameplay state");
     }
 
     public override void Exit()

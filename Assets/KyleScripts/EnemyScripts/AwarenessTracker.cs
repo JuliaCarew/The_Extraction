@@ -6,17 +6,17 @@ public class AwarenessTracker : MonoBehaviour
 
     private void Awake()
     {
-        EnemyEvents.SpottedPlayer += IncreaseAwareness;
+        EnemyEvents.Instance.SpottedPlayer += IncreaseAwareness;
     }
 
     private void OnDestroy()
     {
-        EnemyEvents.SpottedPlayer -= IncreaseAwareness;
+        EnemyEvents.Instance.SpottedPlayer -= IncreaseAwareness;
     }
     public void IncreaseAwareness()
     {
         awarenessLevel += 1f;
-        EnemyEvents.EnemyDetectionChanged(awarenessLevel);
+        EnemyEvents.Instance.EnemyDetectionChanged(awarenessLevel);
         Debug.Log($"Awareness Level: {awarenessLevel}");
     }
 

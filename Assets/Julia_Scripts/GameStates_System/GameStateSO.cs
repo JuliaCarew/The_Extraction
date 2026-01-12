@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GameStateSO", menuName = "Scriptable Objects/GameStateSO")]
+
 public abstract class GameStateSO : ScriptableObject, IState
 {
     [SerializeField] private GameState id;
