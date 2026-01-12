@@ -12,6 +12,7 @@ public class InteractableController : MonoBehaviour
     private InputManager input;
     private MeshRenderer[] meshRenderers;
     private bool isHidden = false;
+    [SerializeField] Vector3 offset;
 
     private void Awake()
     {
@@ -51,9 +52,9 @@ public class InteractableController : MonoBehaviour
 
     private void DetectInteractable()
     {
-        if (Physics.Raycast(transform.position, transform.forward, detectionDistance, interactionLayer))
+        if (Physics.Raycast(transform.position + offset, transform.forward, detectionDistance, interactionLayer))
         {
-            currentInteractable = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, detectionDistance, interactionLayer) 
+            currentInteractable = Physics.Raycast(transform.position + offset, transform.forward, out RaycastHit hit, detectionDistance, interactionLayer) 
                 ? hit.collider.GetComponent<BaseInteractable>() 
                 : null;
         }
@@ -101,6 +102,6 @@ public class InteractableController : MonoBehaviour
         {
             Gizmos.color = Color.red;
         }
-        Gizmos.DrawRay(transform.position, transform.forward * detectionDistance);
+        Gizmos.DrawRay(transform.position + offset, transform.forward * detectionDistance);
     }
 }
