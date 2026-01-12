@@ -27,14 +27,8 @@ public class RadiusDetectionHandler : MonoBehaviour
             if (Vector3.Dot(transform.forward, directionToTarget) >= viewThreshold)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
-
-                // Make sure player's not obstructed.
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
-                {
-                    EnemyEvents.EnemySpottedPlayer();
-                    Debug.Log($"Detected: {results[0].name}");
-                }
-                EnemyEvents.EnemyLostPlayer();
+                Debug.Log("Detecting player.");
+              
             }
         }
     }
