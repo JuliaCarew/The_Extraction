@@ -69,9 +69,6 @@ public class PlayerMovement : MonoBehaviour
         moveInput = new Vector2(inputVector.x, inputVector.y);
     }
 
-
-
-     
     private void OnEnable()
     {
         inputManager.MoveInputEvent += SetMoveInput;  

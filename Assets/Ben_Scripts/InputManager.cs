@@ -10,6 +10,8 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerMovementActions
 
     public event Action<Vector2> MoveInputEvent;
     public event Action<InputAction.CallbackContext> InteractInputEvent;
+    public event Action<InputAction.CallbackContext> PauseInputEvent;
+
 
     private Inputs inputs;
 
@@ -52,5 +54,12 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerMovementActions
         
     }
 
-    
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            // change state to pasued 
+            PauseInputEvent?.Invoke(context);
+        }
+    }
 }

@@ -7,6 +7,7 @@ public enum UIState
     MainMenu,
     Gameplay,
     Pause,
+    Results,
     GameOver,
     Settings
 }
@@ -111,6 +112,11 @@ public class UIManager : MonoBehaviour
     public void ShowSettings()
     {
         SetState(UIState.Settings);
+    }
+
+    public void ShowResults()
+    {
+        SetState(UIState.Results);
     }
 
     public void QuitGame()
