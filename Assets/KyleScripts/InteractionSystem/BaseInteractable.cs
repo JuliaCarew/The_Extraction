@@ -2,7 +2,8 @@ using UnityEngine;
 
 public abstract class BaseInteractable : MonoBehaviour, IInteract
 {
-    [SerializeField] protected string interactionPrompt;
+    [SerializeField] protected string interactionText = "interact";
+    public string InteractionText => interactionText;
     public virtual void Interact()
     {
         throw new System.NotImplementedException();
@@ -10,7 +11,7 @@ public abstract class BaseInteractable : MonoBehaviour, IInteract
 
     protected virtual string GetInteractionPrompt()
     {
-        return interactionPrompt;
+        return interactionText;
     }
 }
    

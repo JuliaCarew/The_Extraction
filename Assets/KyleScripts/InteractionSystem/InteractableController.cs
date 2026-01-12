@@ -8,7 +8,7 @@ public class InteractableController : MonoBehaviour
     [SerializeField] private LayerMask hiddenLayer;
     [SerializeField] private PlayerMovement playerController;
 
-    [SerializeField] private BaseInteractable currentInteractable;
+    public BaseInteractable currentInteractable;
     private InputManager input;
     private MeshRenderer[] meshRenderers;
     private bool isHidden = false;

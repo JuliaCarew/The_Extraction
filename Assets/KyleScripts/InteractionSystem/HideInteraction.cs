@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HideInteraction : BaseInteractable
 {
-
+    public string interactionText = "Hide here";
     public override void Interact()
     {
         // Ideally an event would trigger here to notify interaction controller... but for now
