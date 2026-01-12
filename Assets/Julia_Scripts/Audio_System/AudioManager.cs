@@ -86,6 +86,11 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
         if (debugMode) Debug.Log($"Played sound: {id}");
     }
 
+    public void Play(AudioClip clip) // for UI button sounds
+    {
+        sfxPlayer.PlayOneShot(clip);
+    }
+
     public void PlayMusic(SoundId id)
     {
         AudioClip clip = library.Get(id);

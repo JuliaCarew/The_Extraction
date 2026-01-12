@@ -6,5 +6,7 @@ public enum GameState
     Gameplay,
     Paused,
     Loading,
+    Settings,
+    Results,
     GameOver
 }
