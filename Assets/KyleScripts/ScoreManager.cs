@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -8,7 +9,13 @@ public class ScoreManager : MonoBehaviour
     private int stealthScore = 0;
     private float totalDetectionPercentage = 0f;
 
-    private int totalScore = 0;
+    private int TotalScore = 0;
+
+    public int totalScore 
+    {
+        get { return TotalScore;  }
+        set { TotalScore = Math.Max(0, value); }
+    }
 
     private void Awake()
     {
