@@ -6,6 +6,7 @@ public class ScoreManager : MonoBehaviour
     private int roomClearedTime = 0;
     private int moneyCollected = 0;
     private int stealthScore = 0;
+    private float totalDetectionPercentage = 0f;
 
     private int totalScore = 0;
 
@@ -15,11 +16,19 @@ public class ScoreManager : MonoBehaviour
         // Subscribe to enemy died event, to increase stealth score.
         // Subscribe to tooth collected event.
         // Subscribe to money collected event.
+        PlayerEvents.RoomCleared += () => RoomCleared(0f);
+        PlayerEvents.toothCollected += CollectTooth;
+        PlayerEvents.moneyCollected += CollectMoney;
+        EnemyEvents.EnemyDiedWithDetection += OnEnemyDiedWithDetection;
     }
 
     private void OnDestroy()
     {
         // Unsubscribe from stuff here.
+        PlayerEvents.RoomCleared -= () => RoomCleared(0f);
+        PlayerEvents.toothCollected -= CollectTooth;
+        PlayerEvents.moneyCollected -= CollectMoney;
+        EnemyEvents.EnemyDiedWithDetection -= OnEnemyDiedWithDetection;
     }
 
     private void CollectTooth()
@@ -27,14 +36,19 @@ public class ScoreManager : MonoBehaviour
         teethCollected++;
     }
 
-    private void CollectMoney(int value)
+    private void CollectMoney()
     {
-        moneyCollected += value;
+        moneyCollected++;
     }
 
     private void EnemyDied(float stealthBonus)
     {
         stealthScore += Mathf.RoundToInt(stealthBonus);
+    }
+
+    private void OnEnemyDiedWithDetection(float detectionLevel)
+    {
+        totalDetectionPercentage += detectionLevel;
     }
 
     private void RoomCleared(float timeTaken)
@@ -50,5 +64,10 @@ public class ScoreManager : MonoBehaviour
     public int GetTotalScore()
     {
         return CalculateTotalScore();
+    }
+
+    public float GetTotalDetectionPercentage()
+    {
+        return totalDetectionPercentage;
     }
 }

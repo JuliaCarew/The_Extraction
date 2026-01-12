@@ -26,6 +26,16 @@ public class StatsTracker : MonoBehaviour
         return nTimer; 
     }
 
+    public int GetTooth()
+    {
+        return nTooth;
+    }
+
+    public int GetMoney()
+    {
+        return nMoney;
+    }
+
     public void StartingStatsValues() 
     {
         nTooth = 0;

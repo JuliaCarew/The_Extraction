@@ -628,7 +628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4278772000433776960}
-  - component: {fileID: 1996675962908569215}
+  - component: {fileID: 2681563956701550642}
   m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
@@ -658,7 +658,7 @@ RectTransform:
   m_AnchoredPosition: {x: -76.5, y: 99}
   m_SizeDelta: {x: -53, y: -98}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1996675962908569215
+--- !u!114 &2681563956701550642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

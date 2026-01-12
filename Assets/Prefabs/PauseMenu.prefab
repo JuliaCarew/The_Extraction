@@ -880,7 +880,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5770977390298908598}
-  - component: {fileID: 5773110538810941631}
+  - component: {fileID: 9220037573447427191}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -910,7 +910,7 @@ RectTransform:
   m_AnchoredPosition: {x: -76.5, y: 99}
   m_SizeDelta: {x: -53, y: -98}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5773110538810941631
+--- !u!114 &9220037573447427191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

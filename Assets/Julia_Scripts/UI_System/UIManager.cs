@@ -1,45 +1,120 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class UIManager : SingletonBase<UIManager>
+public enum UIState
 {
-    [SerializeField] private List<UIScreen> screens;
+    None,
+    MainMenu,
+    Gameplay,
+    Pause,
+    GameOver,
+    Settings
+}
 
-    private Dictionary<string, IUIScreen> screenDict;
+public class UIManager : MonoBehaviour
+{
+    [System.Serializable]
+    public class UIScreen
+    {
+        public UIState state;
+        public GameObject screenObject;
+    }
+
+    [SerializeField] private List<UIScreen> screens = new List<UIScreen>();
+    [SerializeField] private UIState currentState = UIState.None;
+    
+    private Dictionary<UIState, GameObject> screenDictionary = new Dictionary<UIState, GameObject>();
 
     private void Awake()
     {
-        base.Awake();
+        // Initialize dictionary
+        screenDictionary.Clear();
         
-        screenDict = new Dictionary<string, IUIScreen>();
         foreach (var screen in screens)
         {
-            screenDict[screen.name.ToLower()] = screen;
-            screen.Hide(); // start hidde
+            if (screen.screenObject != null)
+            {
+                screenDictionary[screen.state] = screen.screenObject;
+                // Hide all screens initially
+                screen.screenObject.SetActive(false);
+            }
+        }
+
+        // Show the initial state 
+        if (currentState != UIState.None)
+        {
+            SetState(currentState);
         }
     }
 
-    public void ShowScreen(string screenName)
+    public void SetState(UIState newState)
     {
-        if (screenDict.TryGetValue(screenName.ToLower(), out var screen))
+        // Hide current state screen
+        if (currentState != UIState.None && screenDictionary.ContainsKey(currentState))
         {
-            screen.Show();
+            screenDictionary[currentState].SetActive(false);
         }
-        else
-            Debug.LogWarning($"UIManager: No screen named {screenName}");
+
+        // Update current state
+        currentState = newState;
+
+        // Show new state screen
+        if (currentState != UIState.None && screenDictionary.ContainsKey(currentState))
+        {
+            screenDictionary[currentState].SetActive(true);
+        }
     }
 
-    public void HideScreen(string screenName)
+    public UIState GetCurrentState()
     {
-        if (screenDict.TryGetValue(screenName.ToLower(), out var screen))
-        {
-            screen.Hide();
-        }
+        return currentState;
+    }
+
+    public void ShowScreen(UIState state)
+    {
+        SetState(state);
     }
 
     public void HideAllScreens()
     {
-        foreach (var screen in screenDict.Values)
-            screen.Hide();
+        foreach (var screen in screenDictionary.Values)
+        {
+            if (screen != null)
+            {
+                screen.SetActive(false);
+            }
+        }
+        currentState = UIState.None;
+    }
+
+    
+    public void ShowMainMenu()
+    {
+        SetState(UIState.MainMenu);
+    }
+
+    public void ShowGameplay()
+    {
+        SetState(UIState.Gameplay);
+    }
+
+    public void ShowPause()
+    {
+        SetState(UIState.Pause);
+    }
+
+    public void ShowGameOver()
+    {
+        SetState(UIState.GameOver);
+    }
+
+    public void ShowSettings()
+    {
+        SetState(UIState.Settings);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

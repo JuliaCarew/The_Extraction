@@ -5,11 +5,11 @@ public class StartGameButton : MonoBehaviour, IUIButtonAction
     public void OnButtonPressed()
     {
         // Check if UIManager exists in the scene
-        if (UIManager.Instance == null)
-        {
-            Debug.LogError("StartGameButton: UIManager.Instance is null");
-            return;
-        }
+        // if (UIManager.Instance == null)
+        // {
+        //     Debug.LogError("StartGameButton: UIManager.Instance is null");
+        //     return;
+        // }
 
         // Check if GameStateMachine exists in the scene
         if (GameStateMachine.Instance == null)
@@ -18,8 +18,8 @@ public class StartGameButton : MonoBehaviour, IUIButtonAction
             return;
         }
 
-        UIManager.Instance.HideAllScreens();
-        UIManager.Instance.ShowScreen("GameplayHUD");
+        //UIManager.Instance.HideAllScreens();
+        //UIManager.Instance.ShowScreen("GameplayHUD");
         GameStateMachine.Instance.ChangeState(GameState.Gameplay);
     }
 
