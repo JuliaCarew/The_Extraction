@@ -7,7 +7,7 @@ public class InteractibleUI : MonoBehaviour
     public TextMeshProUGUI keyText;
     private InteractableController interactableController;
 
-    private void UpdateInteractText()
+    private void Update()
     {
         var interactible = interactableController.currentInteractable;
         if(interactible != null)
