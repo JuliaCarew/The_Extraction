@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class InteractibleUI : MonoBehaviour
 {
     public TextMeshProUGUI keyText;
-    private InteractableController interactableController;
+    public InteractableController interactableController;
 
     private void Update()
     {
