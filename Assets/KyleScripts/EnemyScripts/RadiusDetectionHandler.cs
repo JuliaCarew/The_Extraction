@@ -31,8 +31,10 @@ public class RadiusDetectionHandler : MonoBehaviour
                 // Make sure player's not obstructed.
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
                 {
+                    EnemyEvents.EnemySpottedPlayer();
                     Debug.Log($"Detected: {results[0].name}");
                 }
+                EnemyEvents.EnemyLostPlayer();
             }
         }
     }
