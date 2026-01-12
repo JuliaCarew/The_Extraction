@@ -23,19 +23,19 @@ public class ScoreManager : MonoBehaviour
         // Subscribe to enemy died event, to increase stealth score.
         // Subscribe to tooth collected event.
         // Subscribe to money collected event.
-        PlayerEvents.RoomCleared += () => RoomCleared(0f);
-        PlayerEvents.toothCollected += CollectTooth;
-        PlayerEvents.moneyCollected += CollectMoney;
-        EnemyEvents.EnemyDiedWithDetection += OnEnemyDiedWithDetection;
+        PlayerEvents.Instance.RoomCleared += () => RoomCleared(0f);
+        PlayerEvents.Instance.toothCollected += CollectTooth;
+        PlayerEvents.Instance.moneyCollected += CollectMoney;
+        EnemyEvents.Instance.EnemyDiedWithDetection += OnEnemyDiedWithDetection;
     }
 
     private void OnDestroy()
     {
         // Unsubscribe from stuff here.
-        PlayerEvents.RoomCleared -= () => RoomCleared(0f);
-        PlayerEvents.toothCollected -= CollectTooth;
-        PlayerEvents.moneyCollected -= CollectMoney;
-        EnemyEvents.EnemyDiedWithDetection -= OnEnemyDiedWithDetection;
+        PlayerEvents.Instance.RoomCleared -= () => RoomCleared(0f);
+        PlayerEvents.Instance.toothCollected -= CollectTooth;
+        PlayerEvents.Instance.moneyCollected -= CollectMoney;
+        EnemyEvents.Instance.EnemyDiedWithDetection -= OnEnemyDiedWithDetection;
     }
 
     private void CollectTooth()

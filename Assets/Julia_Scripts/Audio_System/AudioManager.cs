@@ -30,31 +30,31 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
     private void OnEnable()
     {
         // UI
-        UIEvents.Hover += () => PlaySound(SoundId.UiHover);
-        UIEvents.Click += () => PlaySound(SoundId.UiClick);
+        UIEvents.Instance.Hover += () => PlaySound(SoundId.UiHover);
+        UIEvents.Instance.Click += () => PlaySound(SoundId.UiClick);
 
         // Player
-        PlayerEvents.Died += () => PlaySound(SoundId.PlayerDie);
+        PlayerEvents.Instance.Died += () => PlaySound(SoundId.PlayerDie);
 
         // Enemy
-        EnemyEvents.Spawned += _ => PlaySound(SoundId.EnemySpawned);
-        EnemyEvents.Died += _ => PlaySound(SoundId.EnemyDie);
+        EnemyEvents.Instance.Spawned += _ => PlaySound(SoundId.EnemySpawned);
+        EnemyEvents.Instance.Died += _ => PlaySound(SoundId.EnemyDie);
 
         // Game State
-        GameStateEvents.StateChanged += OnGameStateChanged;
+        GameStateEvents.Instance.StateChanged += OnGameStateChanged;
     }
 
     private void OnDisable()
     {
-        UIEvents.Hover -= () => PlaySound(SoundId.UiHover);
-        UIEvents.Click -= () => PlaySound(SoundId.UiClick);
+        UIEvents.Instance.Hover -= () => PlaySound(SoundId.UiHover);
+        UIEvents.Instance.Click -= () => PlaySound(SoundId.UiClick);
 
-        PlayerEvents.Died -= () => PlaySound(SoundId.PlayerDie);
+        PlayerEvents.Instance.Died -= () => PlaySound(SoundId.PlayerDie);
 
-        EnemyEvents.Spawned -= _ => PlaySound(SoundId.EnemySpawned);
-        EnemyEvents.Died -= _ => PlaySound(SoundId.EnemyDie);
+        EnemyEvents.Instance.Spawned -= _ => PlaySound(SoundId.EnemySpawned);
+        EnemyEvents.Instance.Died -= _ => PlaySound(SoundId.EnemyDie);
 
-        GameStateEvents.StateChanged -= OnGameStateChanged;
+        GameStateEvents.Instance.StateChanged -= OnGameStateChanged;
     }
     #endregion
 

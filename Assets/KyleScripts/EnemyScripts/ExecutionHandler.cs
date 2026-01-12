@@ -6,12 +6,12 @@ public class ExecutionHandler : MonoBehaviour, IKillable
 
     private void Awake()
     {
-        EnemyEvents.OnEnemyDetectionChanged += UpdateAwarenessLevel;
+        EnemyEvents.Instance.OnEnemyDetectionChanged += UpdateAwarenessLevel;
     }
 
     private void OnDestroy()
     {
-        EnemyEvents.OnEnemyDetectionChanged -= UpdateAwarenessLevel;
+        EnemyEvents.Instance.OnEnemyDetectionChanged -= UpdateAwarenessLevel;
     }
 
     private void UpdateAwarenessLevel(float newAwareness)
@@ -21,7 +21,7 @@ public class ExecutionHandler : MonoBehaviour, IKillable
     public void Kill()
     {
         // Kill logic here.
-        EnemyEvents.EnemyDiedWithDetectionLevel(awarenessLevel);
+        EnemyEvents.Instance.EnemyDiedWithDetectionLevel(awarenessLevel);
         Debug.Log("Enemy executed. Awareness Level: " + awarenessLevel);
         Destroy(gameObject);
     }

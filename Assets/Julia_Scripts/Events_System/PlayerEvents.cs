@@ -1,18 +1,18 @@
 using System;
 
-public class PlayerEvents
+public class PlayerEvents : SingletonBase<PlayerEvents>
 {
-    public static event Action StartedMoving;
-    public static event Action StoppedMoving;
-    public static event Action Died;
-    public static event Action RoomCleared;
-    public static event Action toothCollected;
-    public static event Action moneyCollected;
+    public event Action StartedMoving;
+    public event Action StoppedMoving;
+    public event Action Died;
+    public event Action RoomCleared;
+    public event Action toothCollected;
+    public event Action moneyCollected;
 
-    public static void PlayerStartedMoving() => StartedMoving?.Invoke();
-    public static void PlayerStoppedMoving() => StoppedMoving?.Invoke();
-    public static void PlayerDied() => Died?.Invoke();
-    public static void RoomClear() => RoomCleared?.Invoke();
-    public static void ToothCollected() => toothCollected?.Invoke();
-    public static void MoneyCollected() => moneyCollected?.Invoke();
+    public void PlayerStartedMoving() => StartedMoving?.Invoke();
+    public void PlayerStoppedMoving() => StoppedMoving?.Invoke();
+    public void PlayerDied() => Died?.Invoke();
+    public void RoomClear() => RoomCleared?.Invoke();
+    public void ToothCollected() => toothCollected?.Invoke();
+    public void MoneyCollected() => moneyCollected?.Invoke();
 }

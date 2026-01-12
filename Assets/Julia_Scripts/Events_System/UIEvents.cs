@@ -1,10 +1,10 @@
 using System;
 
-public class UIEvents
+public class UIEvents : SingletonBase<UIEvents>
 {
-    public static event Action Hover;
-    public static event Action Click;
+    public event Action Hover;
+    public event Action Click;
 
-    public static void UIHover() => Hover?.Invoke();
-    public static void UIClick() => Click?.Invoke();
+    public void UIHover() => Hover?.Invoke();
+    public void UIClick() => Click?.Invoke();
 }

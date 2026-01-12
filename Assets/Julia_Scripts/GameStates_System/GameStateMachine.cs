@@ -42,7 +42,7 @@ public class GameStateMachine : SingletonBase<GameStateMachine>
         currentState = states[newState];
         currentState.Enter();
 
-        GameStateEvents.RaiseStateChanged(newState);
+        GameStateEvents.Instance.RaiseStateChanged(newState);
         if (debugMode) Debug.Log($"Game State changed to: {newState}");
     }
 }
