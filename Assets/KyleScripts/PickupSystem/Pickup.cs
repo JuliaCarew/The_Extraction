@@ -9,11 +9,11 @@ public class Pickup : MonoBehaviour
         {
             if (type == PickupType.Teeth)
             {
-                PlayerEvents.ToothCollected();
+                PlayerEvents.Instance.ToothCollected();
             }
             if (type == PickupType.Money)
             {
-                PlayerEvents.MoneyCollected();
+                PlayerEvents.Instance.MoneyCollected();
             }
             Destroy(gameObject);
         }
