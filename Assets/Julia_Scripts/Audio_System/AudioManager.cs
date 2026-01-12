@@ -72,7 +72,7 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
                 break;
 
             case GameState.Paused:
-                PlaySound(SoundId.UiClick);
+                //PlaySound(SoundId.WinScreen);
                 break;
         }
 }
