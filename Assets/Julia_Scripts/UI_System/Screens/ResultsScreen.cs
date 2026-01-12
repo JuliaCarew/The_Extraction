@@ -12,9 +12,6 @@ public class ResultsScreen : UIScreen
 
     private void Start()
     {
-        statsTracker = FindObjectOfType<StatsTracker>();
-        scoreManager = FindObjectOfType<ScoreManager>();
-
         if (statsTracker == null)
         {
             Debug.LogWarning("GameplayScreen: StatsTracker not found in scene!");

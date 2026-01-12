@@ -2771,6 +2771,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractUI
       objectReference: {fileID: 0}
+    - target: {fileID: 2121963292241246109, guid: f2abe705d67208b4a9650ffa9ef7728c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7374293990063013903, guid: f2abe705d67208b4a9650ffa9ef7728c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

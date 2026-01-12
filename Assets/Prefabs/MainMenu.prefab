@@ -671,7 +671,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4278772000433776960}
   - component: {fileID: 2681563956701550642}
-  - component: {fileID: 3067753564611873018}
   m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
@@ -716,29 +715,6 @@ MonoBehaviour:
   startButton: {fileID: 814857001159560185}
   quitButton: {fileID: 8359494261564003016}
   settingsButton: {fileID: 8437886887531691380}
---- !u!223 &3067753564611873018
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4116651117923676333}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
 --- !u!1 &6588509477386440430
 GameObject:
   m_ObjectHideFlags: 0
