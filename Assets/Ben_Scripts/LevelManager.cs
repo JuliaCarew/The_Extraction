@@ -1,25 +1,31 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : SingletonBase<LevelManager>
 {
     public GameObject player; 
     public PlayerMovement playerController;
     private string spawnPointName;
 
+    List<LevelDataSO> levels = new List<LevelDataSO>();
+    int currentLevelIndex = 0;
+    int killCount = 0;
+
+    [SerializeField] ScoreManager scoreManager;
+
     private void Awake()
     {
         playerController = FindFirstObjectByType<PlayerMovement>();
-    }
-    
+    }   
 
-    public void LoadSceneWithSpawnPoint(string sceneName, string spawnPoint)
+    public void LoadSceneWithSpawnPoint(int buildIndex, string spawnPoint)
     {
         spawnPointName = spawnPoint;
 
         SceneManager.sceneLoaded += onSceneLoaded;
 
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(buildIndex);
     }
 
     void onSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -51,10 +57,23 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void LoadNextLevel()
+    {
+        LoadSceneWithSpawnPoint(currentLevelIndex, "SpawnLevel2");
+
+    }
+    public void CheckCompletion()
+    {
+        if (levels[currentLevelIndex].enemyCount < scoreManager.GetEnemiesKilled())
+        {
+            currentLevelIndex++;
+            LoadNextLevel();
+        }
+    }
+
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= onSceneLoaded;
     }
-
 }
