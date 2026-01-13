@@ -9,6 +9,9 @@ public class RadiusDetectionHandler : MonoBehaviour
     [SerializeField] private float viewThreshold = 0.7f;
     [SerializeField] private LayerMask targetLayer;
     [SerializeField] private LayerMask obstructionLayer;
+    [SerializeField] private Material normalMat;
+    [SerializeField] private Material spottedMat;
+    [SerializeField] private MeshRenderer mr;
 
     private Collider[] results = new Collider[1];
 
@@ -28,7 +31,11 @@ public class RadiusDetectionHandler : MonoBehaviour
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
                 Debug.Log("Detecting player.");
-              
+                mr.material = spottedMat;
+            }
+            else
+            {
+                mr.material = normalMat;
             }
         }
     }
