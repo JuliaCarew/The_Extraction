@@ -24,9 +24,4 @@ public class AudioPlayer : MonoBehaviour
         source.loop = true;
         source.Play();
     }
-
-    public void SetVolume(float volume)
-    {
-        source.volume = volume;
-    }
 }

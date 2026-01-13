@@ -11,7 +11,6 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
 
     private AudioPlayer musicPlayer;
     private AudioPlayer sfxPlayer;
-    private AudioVolumeMixer volumeService;
     public bool debugMode = false;
 
     protected override void Awake()
@@ -20,10 +19,6 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
 
         musicPlayer = new AudioPlayer(musicSource);
         sfxPlayer = new AudioPlayer(sfxSource);
-        volumeService = new AudioVolumeMixer();
-
-        musicPlayer.SetVolume(volumeService.MusicVolume);
-        sfxPlayer.SetVolume(volumeService.SfxVolume);
     }
 
     #region Event Subscriptions
@@ -72,10 +67,18 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
                 break;
 
             case GameState.Paused:
-                //PlaySound(SoundId.WinScreen);
                 break;
         }
 }
+
+    public void PlayMusic(SoundId id)
+    {
+        AudioClip clip = library.Get(id);
+        if (clip == null) return;
+
+        musicPlayer.PlayLoop(clip);
+        if (debugMode) Debug.Log($"Playing music: {id}");
+    }
 
     public void PlaySound(SoundId id)
     {
@@ -91,12 +94,19 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
         sfxPlayer.PlayOneShot(clip);
     }
 
-    public void PlayMusic(SoundId id)
+    public void SetMusicVolume(float value) // for UI sliders
     {
-        AudioClip clip = library.Get(id);
-        if (clip == null) return;
+        musicSource.volume = Mathf.Clamp01(value);
 
-        musicPlayer.PlayLoop(clip);
-        if (debugMode) Debug.Log($"Playing music: {id}");
+        if (debugMode)
+            Debug.Log($"Music volume set to {musicSource.volume}");
+    }
+
+    public void SetSfxVolume(float value) // for UI sliders
+    {
+        sfxSource.volume = Mathf.Clamp01(value);
+
+        if (debugMode)
+            Debug.Log($"SFX volume set to {sfxSource.volume}");
     }
 }
