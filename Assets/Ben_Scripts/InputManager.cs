@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerMovementActions
     public event Action<Vector2> MoveInputEvent;
     public event Action<InputAction.CallbackContext> InteractInputEvent;
     public event Action<InputAction.CallbackContext> PauseInputEvent;
+    public event Action ChangeCameraInputEvent; 
 
 
     private Inputs inputs;
@@ -40,19 +41,7 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerMovementActions
         {
             InteractInputEvent?.Invoke(context);
         }
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    }    
 
     public void OnPause(InputAction.CallbackContext context)
     {
@@ -60,6 +49,14 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerMovementActions
         {
             // change state to pasued 
             PauseInputEvent?.Invoke(context);
+        }
+    }
+
+    public void OnChangeCamera(InputAction.CallbackContext context)
+    {
+        if (context.started) 
+        {
+            ChangeCameraInputEvent?.Invoke(); 
         }
     }
 }
