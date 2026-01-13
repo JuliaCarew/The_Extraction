@@ -1680,12 +1680,15 @@ RectTransform:
   m_PrefabInstance: {fileID: 344748814}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &360951080 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8538835741573915288, guid: 51fd05ed2f6ddb84da045735668e5b59, type: 3}
   m_PrefabInstance: {fileID: 408449401}
   m_PrefabAsset: {fileID: 0}
 =======
+=======
+>>>>>>> Stashed changes
 --- !u!1 &344904442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,6 +1736,9 @@ MonoBehaviour:
   player: {fileID: 1403131748}
   playerController: {fileID: 1403131751}
   scoreManager: {fileID: 1406361956}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1001 &408449401
 PrefabInstance:
@@ -3901,7 +3907,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 408449401}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 360951080}
+=======
+  m_GameObject: {fileID: 1403131748}
+>>>>>>> Stashed changes
 =======
   m_GameObject: {fileID: 1403131748}
 >>>>>>> Stashed changes
