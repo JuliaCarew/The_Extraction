@@ -8,12 +8,13 @@ public class ScoreManager : MonoBehaviour
     private int moneyCollected = 0;
     private int stealthScore = 0;
     private float totalDetectionPercentage = 0f;
+    private int enemiesKilled = 0;
 
     private int TotalScore = 0;
 
-    public int totalScore 
+    public int totalScore
     {
-        get { return TotalScore;  }
+        get { return TotalScore; }
         set { TotalScore = Math.Max(0, value); }
     }
 
@@ -43,6 +44,11 @@ public class ScoreManager : MonoBehaviour
         teethCollected++;
     }
 
+    private void EnemyKilled()
+    {
+        enemiesKilled++;
+    }
+
     private void CollectMoney()
     {
         moneyCollected++;
@@ -61,6 +67,11 @@ public class ScoreManager : MonoBehaviour
     private void RoomCleared(float timeTaken)
     {
         roomClearedTime = Mathf.RoundToInt(timeTaken);
+    }
+
+    public int GetEnemiesKilled()
+    {
+        return enemiesKilled;
     }
 
     private int CalculateTotalScore()
