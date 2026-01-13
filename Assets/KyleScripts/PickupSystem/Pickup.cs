@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    [SerializeField] private PickupType type;
+    [SerializeField] public PickupType type;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -15,6 +15,10 @@ public class Pickup : MonoBehaviour
             {
                 PlayerEvents.Instance.MoneyCollected();
             }
+            if (type == PickupType.Weapon)
+            {
+                PlayerEvents.Instance.WeaponPickedUp();
+            }
             Destroy(gameObject);
         }
     }
@@ -23,5 +27,6 @@ public class Pickup : MonoBehaviour
 public enum PickupType
 {
     Teeth,
-    Money
+    Money,
+    Weapon
 }

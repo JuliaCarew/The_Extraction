@@ -8,6 +8,7 @@ public class PlayerEvents : SingletonBase<PlayerEvents>
     public event Action RoomCleared;
     public event Action toothCollected;
     public event Action moneyCollected;
+    public event Action pickedUpWeapon;
 
     public void PlayerStartedMoving() => StartedMoving?.Invoke();
     public void PlayerStoppedMoving() => StoppedMoving?.Invoke();
@@ -15,4 +16,6 @@ public class PlayerEvents : SingletonBase<PlayerEvents>
     public void RoomClear() => RoomCleared?.Invoke();
     public void ToothCollected() => toothCollected?.Invoke();
     public void MoneyCollected() => moneyCollected?.Invoke();
+    public void WeaponPickedUp() => pickedUpWeapon?.Invoke();
+
 }

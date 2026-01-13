@@ -92,6 +92,8 @@ public class InteractableController : MonoBehaviour
         EnableMeshes();
     }
 
+
+
     private void OnDrawGizmos()
     {
         if (currentInteractable != null)
