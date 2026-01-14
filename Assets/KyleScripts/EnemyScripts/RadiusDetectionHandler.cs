@@ -31,8 +31,10 @@ public class RadiusDetectionHandler : MonoBehaviour
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
                 Debug.Log("Detecting player.");
-
-                EnemyEvents.Instance.EnemyDetectionChanged(0.1f);
+                if (GameStateMachine.Instance.GetCurrentState() == GameState.Gameplay)
+                {
+                    EnemyEvents.Instance.EnemyDetectionChanged(0.1f);
+                }
                 mr.material = spottedMat;
             }
             else
