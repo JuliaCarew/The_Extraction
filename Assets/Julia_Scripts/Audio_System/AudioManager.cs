@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class AudioManager : SingletonBase<AudioManager>, IAudioService
 {
@@ -13,38 +14,58 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
     private AudioPlayer sfxPlayer;
     public bool debugMode = false;
 
+    // Store delegate references for UI events to prevent duplicate subscriptions
+    private Action uiHoverHandler;
+    private Action uiClickHandler;
+
     protected override void Awake()
     {
         base.Awake();
 
         musicPlayer = new AudioPlayer(musicSource);
         sfxPlayer = new AudioPlayer(sfxSource);
+
+        // Initialize UI delegate references
+        uiHoverHandler = () => PlaySound(SoundId.UiHover);
+        uiClickHandler = () => PlaySound(SoundId.UiClick);
     }
 
     #region Event Subscriptions
     private void OnEnable()
     {
-        // UI
-        UIEvents.Instance.Hover += () => PlaySound(SoundId.UiHover);
-        UIEvents.Instance.Click += () => PlaySound(SoundId.UiClick);
+        // UI - using handlers to prevent duplicate subscriptions
+        if (UIEvents.Instance != null)
+        {
+            UIEvents.Instance.Hover += uiHoverHandler;
+            UIEvents.Instance.Click += uiClickHandler;
+        }
 
         // Player
-        PlayerEvents.Instance.Died += () => PlaySound(SoundId.PlayerDie);
+        if (PlayerEvents.Instance != null)
+        {
+            PlayerEvents.Instance.Died += () => PlaySound(SoundId.PlayerDie);
+        }
 
         // Enemy
-        EnemyEvents.Instance.Spawned += _ => PlaySound(SoundId.EnemySpawned);
-        EnemyEvents.Instance.Died += _ => PlaySound(SoundId.EnemyDie);
+        if (EnemyEvents.Instance != null)
+        {
+            EnemyEvents.Instance.Spawned += _ => PlaySound(SoundId.EnemySpawned);
+            EnemyEvents.Instance.Died += _ => PlaySound(SoundId.EnemyDie);
+        }
 
         // Game State
-        GameStateEvents.Instance.StateChanged += OnGameStateChanged;
+        if (GameStateEvents.Instance != null)
+        {
+            GameStateEvents.Instance.StateChanged += OnGameStateChanged;
+        }
     }
 
     private void OnDisable()
     {
         if (UIEvents.Instance != null)
         {
-            UIEvents.Instance.Hover -= () => PlaySound(SoundId.UiHover);
-            UIEvents.Instance.Click -= () => PlaySound(SoundId.UiClick);
+            UIEvents.Instance.Hover -= uiHoverHandler;
+            UIEvents.Instance.Click -= uiClickHandler;
         }
 
         if (PlayerEvents.Instance != null)
