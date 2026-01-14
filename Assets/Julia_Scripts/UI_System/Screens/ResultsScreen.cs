@@ -4,7 +4,6 @@ using UnityEngine;
 public class ResultsScreen : UIScreen
 {
     [SerializeField] private TextMeshProUGUI teethText;
-    [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private TextMeshProUGUI detectionText;
 
     [SerializeField] private ScoreManager scoreManager;

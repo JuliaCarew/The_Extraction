@@ -5,7 +5,6 @@ using System.Collections;
 public class GameplayScreen : UIScreen
 {
     [SerializeField] private TextMeshProUGUI teethText;
-    [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI detectionText;
 
@@ -39,22 +38,6 @@ public class GameplayScreen : UIScreen
                 teethText.text = scoreManager.GetTeethCollected().ToString();
             }
 
-            // Update money amount
-            if (moneyText != null)
-            {
-                moneyText.text = scoreManager.GetMoney().ToString();
-            }
-
-            /*// Update timer 
-            if (timerText != null)
-            {
-                float time = statsTracker.getTimer();
-                int minutes = Mathf.FloorToInt(time / 60);
-                int seconds = Mathf.FloorToInt(time % 60);
-                timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-            }*/
-
-
             if(timerText != null) 
             {
                 int minutes = Mathf.FloorToInt(timeCounter / 60);
@@ -73,7 +56,7 @@ public class GameplayScreen : UIScreen
                     detectionText.text = detection.ToString("F1") + "%";
                     if (detection == scoreManager.MaxDetectionPercentage)
                     {
-                        StartCoroutine(ChangeToGameover());
+                        ChangeToGameover();
                     }
                     lastCheckedAwareness = detection;
                 }
@@ -86,9 +69,8 @@ public class GameplayScreen : UIScreen
         timeCounter += Time.fixedDeltaTime; 
     }
 
-    private IEnumerator ChangeToGameover()
+    private void ChangeToGameover()
     {
-        yield return new WaitForSeconds(0.5f);
         timeCounter = 0;
         scoreManager.ResetValues();
         GameStateMachine.Instance.ChangeState(GameState.GameOver);
