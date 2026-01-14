@@ -297,6 +297,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1865909598}
     m_Modifications:
+    - target: {fileID: 209777352231312688, guid: 609828ff7d4487e4681df8d137408676, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 392.92
+      objectReference: {fileID: 0}
     - target: {fileID: 864419046975077547, guid: 609828ff7d4487e4681df8d137408676, type: 3}
       propertyPath: m_Name
       value: GameplayHUD
@@ -470,7 +474,8 @@ PrefabInstance:
       value: -43.840004
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1951863646208942263, guid: 609828ff7d4487e4681df8d137408676, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2368792752777420671, guid: 609828ff7d4487e4681df8d137408676, type: 3}
       insertIndex: -1
