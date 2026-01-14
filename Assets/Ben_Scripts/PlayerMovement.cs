@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    [SerializeField] private Transform spawnpoint;
     [SerializeField] private InputManager inputManager;
 
     public float movSpeed = 4f;
@@ -67,6 +67,13 @@ public class PlayerMovement : MonoBehaviour
     void SetMoveInput(Vector2 inputVector)
     {
         moveInput = new Vector2(inputVector.x, inputVector.y);
+    }
+
+    public void ResetPlayerToSpawn(Transform spawn)
+    {
+        transform.position = spawn.transform.position;
+        Debug.Log("Reset player's position to: " + spawn.transform.position);
+        GameStateEvents.Instance.RaiseStateChanged(GameState.Gameplay); // change to gameplay state
     }
 
     private void OnEnable()

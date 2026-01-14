@@ -145,7 +145,13 @@ public class UIManager : MonoBehaviour
         currentState = UIState.None;
     }
 
-    
+    public void ShowRetry()
+    {
+        // check GetAwarenessLevel() from AwarenessTracker
+        //ChangeGameState(GameState.GameOver);
+    }
+
+
     public void ShowMainMenu(){ ChangeGameState(GameState.Menu); }
     public void ShowGameplay(){ ChangeGameState(GameState.Gameplay); }
     public void ShowPause(){ ChangeGameState(GameState.Paused); }
