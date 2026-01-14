@@ -1,6 +1,7 @@
-using UnityEngine;
-using TMPro;
 using System.Collections;
+using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class GameplayScreen : UIScreen
 {
@@ -71,8 +72,9 @@ public class GameplayScreen : UIScreen
                 {
                     Debug.Log("Change Awareness UI"); 
                     detectionText.text = detection.ToString("F1") + "%";
-                    if (detection == scoreManager.MaxDetectionPercentage)
+                    if (detection >= scoreManager.MaxDetectionPercentage)
                     {
+                        Debug.Log("detection is max detection percentage: " + scoreManager.MaxDetectionPercentage);
                         StartCoroutine(ChangeToGameover());
                     }
                     lastCheckedAwareness = detection;
