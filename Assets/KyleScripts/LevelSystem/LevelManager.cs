@@ -36,6 +36,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        RemoveAllEnemies(); // remove up all enemies before transitioning
         currentLevelIndex++;
         if (currentLevelIndex < levels.Count) 
         {
@@ -48,5 +49,19 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("All levels completed or index out of range.");
         }
+    }
+
+   
+    public void RemoveAllEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            if (enemy != null)
+            {
+                Destroy(enemy);
+            }
+        }
+        Debug.Log($"Removed {enemies.Length} enemies from the scene.");
     } 
 }
