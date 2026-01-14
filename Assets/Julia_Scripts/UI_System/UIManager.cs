@@ -148,6 +148,7 @@ public class UIManager : MonoBehaviour
     public void ShowRetry()
     {
         // check GetAwarenessLevel() from AwarenessTracker
+        //ChangeGameState(GameState.GameOver);
     }
 
 

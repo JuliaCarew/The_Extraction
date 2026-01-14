@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &8587075 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 751855514818336620, guid: b8381389feea33a46b604c48d073cde4, type: 3}
+  m_PrefabInstance: {fileID: 677347510}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &40476214
 Mesh:
   m_ObjectHideFlags: 0
@@ -1541,6 +1546,8 @@ MonoBehaviour:
     screenObject: {fileID: 637716021}
   - state: 6
     screenObject: {fileID: 457963095}
+  - state: 5
+    screenObject: {fileID: 8587075}
   stateMappings:
   - gameState: 0
     uiState: 1
@@ -1552,6 +1559,8 @@ MonoBehaviour:
     uiState: 6
   - gameState: 5
     uiState: 4
+  - gameState: 6
+    uiState: 5
   currentState: 1
 --- !u!4 &332311748
 Transform:
@@ -3429,6 +3438,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 23a7b261e241d50489321e459100ef5b, type: 2}
   - {fileID: 11400000, guid: 417cd179db9651e47bd58f7a6835edd4, type: 2}
   - {fileID: 11400000, guid: 3199f211cb9579a409c1073a6b986593, type: 2}
+  - {fileID: 11400000, guid: 186e8bec7b8950043a635e11a8bf56c3, type: 2}
   debugMode: 1
 --- !u!43 &873465341
 Mesh:
