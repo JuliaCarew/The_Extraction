@@ -7,7 +7,7 @@ public class ScoreManager : MonoBehaviour
     private int roomClearedTime = 0;
     private int moneyCollected = 0;
     private int stealthScore = 0;
-    private float totalDetectionPercentage = 0f;
+    public float totalDetectionPercentage = 0f;
     public float MaxDetectionPercentage { get { return maxDetectionPercentage;  } }
     private float maxDetectionPercentage = 100f;
     public int EnemiesKilled { get { return enemiesKilled; } }
@@ -32,6 +32,7 @@ public class ScoreManager : MonoBehaviour
         PlayerEvents.Instance.moneyCollected += CollectMoney;
         EnemyEvents.Instance.EnemyDiedWithDetection += OnEnemyDiedWithDetection;
         EnemyEvents.Instance.OnEnemyKilled += EnemyKilled;
+        EnemyEvents.Instance.OnEnemyDetectionChanged += UpdateDetection;
     }
 
     private void OnDestroy()
@@ -42,6 +43,7 @@ public class ScoreManager : MonoBehaviour
         PlayerEvents.Instance.moneyCollected -= CollectMoney;
         EnemyEvents.Instance.EnemyDiedWithDetection -= OnEnemyDiedWithDetection;
         EnemyEvents.Instance.OnEnemyKilled -= EnemyKilled;
+        EnemyEvents.Instance.OnEnemyDetectionChanged -= UpdateDetection;
     }
 
     private void CollectTooth()
@@ -61,6 +63,12 @@ public class ScoreManager : MonoBehaviour
     private void EnemyKilled()
     {
         enemiesKilled++;
+    }
+
+    private void UpdateDetection(float awareness)
+    {
+        totalDetectionPercentage += awareness;
+        Debug.Log("Total detection updated. now: " + totalDetectionPercentage);
     }
 
     private void CollectMoney()

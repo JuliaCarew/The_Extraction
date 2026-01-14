@@ -12,18 +12,26 @@ public class GameplayScreen : UIScreen
     //[SerializeField] private StatsTracker statsTracker;
     [SerializeField] private ScoreManager scoreManager;
 
+    private float timeCounter; 
+
+    public float lastCheckedAwareness;
+    
+
     private void Start()
     {
         if (scoreManager == null)
         {
             Debug.LogWarning("GameplayScreen: ScoreManager not found in scene!");
         }
+
+        timeCounter = 0; 
+
     }
 
     private void Update()
     {
         // Update UI in real-time
-        if (scoreManager != null && IsVisible)
+        if (scoreManager != null)
         {
             // Update teeth count
             if (teethText != null)
@@ -46,17 +54,36 @@ public class GameplayScreen : UIScreen
                 timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
             }*/
 
+
+            if(timerText != null) 
+            {
+                int minutes = Mathf.FloorToInt(timeCounter / 60);
+                int seconds = Mathf.FloorToInt(timeCounter % 60);
+                timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds); 
+            }
+
             // Update detection percentage
             if (detectionText != null && scoreManager != null)
             {
                 float detection = scoreManager.GetTotalDetectionPercentage();
-                detectionText.text = detection.ToString("F1") + "%";
-                if (detection == scoreManager.MaxDetectionPercentage)
+                Debug.Log("Detection: " + detection);
+                if (lastCheckedAwareness != detection)
                 {
-                    StartCoroutine(ChangeToGameover());
+                    Debug.Log("Change Awareness UI"); 
+                    detectionText.text = detection.ToString("F1") + "%";
+                    if (detection == scoreManager.MaxDetectionPercentage)
+                    {
+                        StartCoroutine(ChangeToGameover());
+                    }
+                    lastCheckedAwareness = detection;
                 }
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        timeCounter += Time.fixedDeltaTime; 
     }
 
     private IEnumerator ChangeToGameover()
