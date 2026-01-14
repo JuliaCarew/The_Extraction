@@ -12,5 +12,9 @@ public abstract class BaseInteractable : MonoBehaviour, IInteract
     {
         return interactionText;
     }
+
+    public virtual void SetInteractionPrompt(string newText)
+    {
+        interactionText = newText;
+    }
 }
-   

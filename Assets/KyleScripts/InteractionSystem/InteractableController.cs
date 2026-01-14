@@ -7,17 +7,31 @@ public class InteractableController : MonoBehaviour
     [SerializeField] private LayerMask interactionLayer;
     [SerializeField] private LayerMask hiddenLayer;
     [SerializeField] private PlayerMovement playerController;
+    [SerializeField] private PickUpController pickUpController;
 
     public BaseInteractable currentInteractable;
     private InputManager input;
     private MeshRenderer[] meshRenderers;
     private bool isHidden = false;
     [SerializeField] Vector3 offset;
+    private BaseInteractable previousInteractable;
+    private string originalPrompt = "";
+
+    public bool hasWeapon => pickUpController != null && pickUpController.hasWeapon;
 
     private void Awake()
     {
         input = GetComponentInChildren<InputManager>();
         meshRenderers = GetComponentsInChildren<MeshRenderer>(true);
+        
+        if (pickUpController == null)
+        {
+            pickUpController = GetComponent<PickUpController>();
+            if (pickUpController == null)
+            {
+                pickUpController = GetComponentInParent<PickUpController>();
+            }
+        }
     }
 
     private void OnEnable()
@@ -52,15 +66,50 @@ public class InteractableController : MonoBehaviour
 
     private void DetectInteractable()
     {
-        if (Physics.Raycast(transform.position + offset, transform.forward, detectionDistance, interactionLayer))
+        if (Physics.Raycast(transform.position + offset, transform.forward, out RaycastHit hit, detectionDistance, interactionLayer))
         {
-            currentInteractable = Physics.Raycast(transform.position + offset, transform.forward, out RaycastHit hit, detectionDistance, interactionLayer) 
-                ? hit.collider.GetComponent<BaseInteractable>() 
-                : null;
+            currentInteractable = hit.collider.GetComponent<BaseInteractable>();
+                
+            // store original prompt
+            if (currentInteractable != null && currentInteractable != previousInteractable)
+            {
+                originalPrompt = currentInteractable.GetInteractionPrompt();
+                previousInteractable = currentInteractable;
+            }
+                
+            // update interaction prompt based on weapon status
+            UpdateInteractionPrompt();
         }
         else
         {
             currentInteractable = null;
+            previousInteractable = null;
+        }
+    }
+
+    private bool IsEnemyInteractable()
+    {
+        if (currentInteractable == null)
+            return false;
+            
+        return currentInteractable.gameObject.CompareTag("Enemy");
+    }
+
+    private void UpdateInteractionPrompt()
+    {
+        if (currentInteractable == null || string.IsNullOrEmpty(originalPrompt))
+            return;
+
+        if (IsEnemyInteractable())
+        {
+            if (!hasWeapon)
+            {
+                currentInteractable.SetInteractionPrompt("Get a weapon!");
+            }
+            else // default prompt when player has a weapon
+            {
+                currentInteractable.SetInteractionPrompt(originalPrompt);
+            }
         }
     }
 
@@ -72,7 +121,16 @@ public class InteractableController : MonoBehaviour
         }
         else
         {
-            currentInteractable?.Interact();
+            if (currentInteractable != null)
+            {
+                // need weapon for enemy interactables
+                if (IsEnemyInteractable() && !hasWeapon)
+                {
+                    return;
+                }
+                
+                currentInteractable.Interact();
+            }
         }
     }
 
