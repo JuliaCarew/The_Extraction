@@ -23,6 +23,7 @@ public class ExecutionHandler : MonoBehaviour, IKillable
         // Kill logic here.
         EnemyEvents.Instance.EnemyDiedWithDetectionLevel(awarenessLevel);
         Debug.Log("Enemy executed. Awareness Level: " + awarenessLevel);
+        EnemyEvents.Instance.EnemyKilled();
         Destroy(gameObject);
     }
 }
