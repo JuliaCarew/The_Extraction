@@ -74,10 +74,20 @@ public class Pickup : MonoBehaviour
         {
             yield break;
         }
-        while (Vector3.Distance(transform.position, playerTransform.position) > 1f)
+        while (Vector3.Distance(transform.position, playerTransform.position) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, Time.deltaTime * 5f);
+            transform.position = Vector3.MoveTowards(
+             transform.position,
+             playerTransform.position,
+             Time.unscaledDeltaTime * 5f
+         );
+
             yield return null;
+        }
+        if (type == PickupType.Teeth)
+        {
+            PlayerEvents.Instance.ToothCollected();
+            Destroy(gameObject);
         }
     }
 }
