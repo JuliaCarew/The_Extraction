@@ -64,7 +64,10 @@ public class GameStateMachine : SingletonBase<GameStateMachine>
         }
 
         // Ensure timeScale is set correctly for pause / gameplay states
-        if (newState == GameState.Paused || newState == GameState.Menu || newState == GameState.GameOver)
+        if (newState == GameState.Paused || 
+        newState == GameState.Menu || 
+        newState == GameState.GameOver || 
+        newState == GameState.Results)
         {
             if (Time.timeScale != 0f)
             {
