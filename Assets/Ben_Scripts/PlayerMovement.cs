@@ -74,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = spawn.transform.position;
         Debug.Log("Reset player's position to: " + spawn.transform.position);
         GameStateEvents.Instance.RaiseStateChanged(GameState.Gameplay); // change to gameplay state
+        canMove = true;
     }
 
     private void OnEnable()
