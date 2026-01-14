@@ -24,8 +24,8 @@ public class GameplayScreen : UIScreen
             Debug.LogWarning("GameplayScreen: ScoreManager not found in scene!");
         }
 
-        timeCounter = 0; 
-
+        timeCounter = 0;
+        lastCheckedAwareness = 0f;
     }
 
     private void Update()
@@ -56,7 +56,10 @@ public class GameplayScreen : UIScreen
                 {
                     Debug.Log("Change Awareness UI"); 
                     detectionText.text = detection.ToString("F1") + "%";
-                    if (detection >= scoreManager.MaxDetectionPercentage)
+                    // ONLY trigger game over if were in gameplay state
+                    if (detection >= scoreManager.MaxDetectionPercentage && 
+                        GameStateMachine.Instance != null && 
+                        GameStateMachine.Instance.GetCurrentState() == GameState.Gameplay)
                     {
                         Debug.Log("detection is max detection percentage: " + scoreManager.MaxDetectionPercentage);
                         ChangeToGameover();
