@@ -7,16 +7,10 @@ public class ResultsScreen : UIScreen
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private TextMeshProUGUI detectionText;
 
-    private StatsTracker statsTracker;
-    private ScoreManager scoreManager;
+    [SerializeField] private ScoreManager scoreManager;
 
     private void Start()
     {
-        if (statsTracker == null)
-        {
-            Debug.LogWarning("GameplayScreen: StatsTracker not found in scene!");
-        }
-
         if (scoreManager == null)
         {
             Debug.LogWarning("GameplayScreen: ScoreManager not found in scene!");
@@ -26,18 +20,12 @@ public class ResultsScreen : UIScreen
     private void Update()
     {
         // Update UI in real-time
-        if (statsTracker != null && IsVisible)
+        if (scoreManager != null)
         {
             // Update teeth count
             if (teethText != null)
             {
-                teethText.text = statsTracker.GetTooth().ToString();
-            }
-
-            // Update money amount
-            if (moneyText != null)
-            {
-                moneyText.text = statsTracker.GetMoney().ToString();
+                teethText.text = scoreManager.GetTeethCollected().ToString();
             }
 
             // Update detection percentage
