@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("Level completed!");
             currentLevel.ClearRoom();
+            GameStateEvents.Instance.RaiseStateChanged(GameState.Results); // change state to results
         }
     }
 
