@@ -110,4 +110,12 @@ public class ScoreManager : MonoBehaviour
     {
         return totalDetectionPercentage;
     }
+
+    public void ResetValues() 
+    {
+        totalDetectionPercentage = 0;
+        teethCollected = 0;
+        moneyCollected = 0;
+        stealthScore = 0;
+    }
 }

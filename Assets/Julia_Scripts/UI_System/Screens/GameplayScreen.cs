@@ -89,6 +89,8 @@ public class GameplayScreen : UIScreen
     private IEnumerator ChangeToGameover()
     {
         yield return new WaitForSeconds(0.5f);
+        timeCounter = 0;
+        scoreManager.ResetValues();
         GameStateMachine.Instance.ChangeState(GameState.GameOver);
     }
 }
