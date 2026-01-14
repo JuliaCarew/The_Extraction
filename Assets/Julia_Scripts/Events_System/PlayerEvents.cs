@@ -9,6 +9,7 @@ public class PlayerEvents : SingletonBase<PlayerEvents>
     public event Action toothCollected;
     public event Action moneyCollected;
     public event Action pickedUpWeapon;
+    public event Action playerReset;
 
     public void PlayerStartedMoving() => StartedMoving?.Invoke();
     public void PlayerStoppedMoving() => StoppedMoving?.Invoke();
@@ -17,5 +18,5 @@ public class PlayerEvents : SingletonBase<PlayerEvents>
     public void ToothCollected() => toothCollected?.Invoke();
     public void MoneyCollected() => moneyCollected?.Invoke();
     public void WeaponPickedUp() => pickedUpWeapon?.Invoke();
-
+    public void PlayerReset() => playerReset?.Invoke();
 }
