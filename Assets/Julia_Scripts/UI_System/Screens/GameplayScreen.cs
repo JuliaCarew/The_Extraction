@@ -36,7 +36,7 @@ public class GameplayScreen : UIScreen
             // Update teeth count
             if (teethText != null)
             {
-                teethText.text = scoreManager.GetTeethCollected().ToString();
+                teethText.text = "Teeth Collected: " + scoreManager.GetTeethCollected().ToString();
             }
 
             if(timerText != null) 
@@ -50,7 +50,7 @@ public class GameplayScreen : UIScreen
             if (detectionText != null && scoreManager != null)
             {
                 float detection = scoreManager.GetTotalDetectionPercentage();
-                Debug.Log("Detection: " + detection);
+                //Debug.Log("Detection: " + detection);
                 if (lastCheckedAwareness != detection)
                 {
                     Debug.Log("Change Awareness UI"); 

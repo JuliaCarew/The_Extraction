@@ -1725,6 +1725,10 @@ PrefabInstance:
       propertyPath: debugMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 752456282405823159, guid: 51fd05ed2f6ddb84da045735668e5b59, type: 3}
+      propertyPath: pickUpController
+      value: 
+      objectReference: {fileID: 1010564636}
     - target: {fileID: 8112607707979555444, guid: 51fd05ed2f6ddb84da045735668e5b59, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.12816048
@@ -4095,6 +4099,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bat
       objectReference: {fileID: 0}
+    - target: {fileID: 1684073673547703811, guid: b37f865a3c178534db524b690fa45051, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684073673547703811, guid: b37f865a3c178534db524b690fa45051, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684073673547703811, guid: b37f865a3c178534db524b690fa45051, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6386021341664460430, guid: b37f865a3c178534db524b690fa45051, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4135,10 +4151,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6585166567692555668, guid: b37f865a3c178534db524b690fa45051, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 2534964839176971238, guid: d52f99f64bd70b94e939c0d44378adb9, type: 3}
     - target: {fileID: 7631203209410960418, guid: b37f865a3c178534db524b690fa45051, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 3e0cf5a4b8f9f44439107523119c8b9e, type: 2}
+      objectReference: {fileID: 2100000, guid: d46f335847bfe8d4588feb460ac85a20, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4428,6 +4448,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33ce8cdc2590d904bb0dffb93989873e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1010564636 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 300371497588549114, guid: 51fd05ed2f6ddb84da045735668e5b59, type: 3}
+  m_PrefabInstance: {fileID: 408449401}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360951080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2076c2be810874d4baf2361b1889e13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!43 &1101122023
@@ -5277,6 +5308,14 @@ PrefabInstance:
       propertyPath: mr
       value: 
       objectReference: {fileID: 1552292295}
+    - target: {fileID: 2402800669817584163, guid: 375502f5f511dae4684a8d09482eedac, type: 3}
+      propertyPath: normalMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 277aaa40ad771e8488f8cbe01834361d, type: 2}
+    - target: {fileID: 4291329084019316330, guid: 375502f5f511dae4684a8d09482eedac, type: 3}
+      propertyPath: toothPickup
+      value: 
+      objectReference: {fileID: 1521807547397308944, guid: 371425e97974c384381248d19ad53d3b, type: 3}
     - target: {fileID: 4618264343457027780, guid: 375502f5f511dae4684a8d09482eedac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.693565
@@ -7742,6 +7781,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: afbec42252d186b4b99f1b3ba5731551, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0ccf93257b2945346942b469f3da19a5, type: 2}
     - target: {fileID: 919132149155446097, guid: afbec42252d186b4b99f1b3ba5731551, type: 3}
       propertyPath: m_Name
       value: Trash_Can_Placeholder
@@ -8199,6 +8242,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 60769c2e779617340ba9d51e06f1ba0b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7e550fafb8ee786438c680361a9aa1ae, type: 2}
     - target: {fileID: 919132149155446097, guid: 60769c2e779617340ba9d51e06f1ba0b, type: 3}
       propertyPath: m_Name
       value: Toilet_Placeholder

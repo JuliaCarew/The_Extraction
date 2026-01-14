@@ -150,9 +150,9 @@ MonoBehaviour:
   obstructionLayer:
     serializedVersion: 2
     m_Bits: 256
-  normalMat: {fileID: -5209150659612451695, guid: 2f6e23fbb932f5146b4120800c8704e3, type: 3}
+  normalMat: {fileID: 2100000, guid: 277aaa40ad771e8488f8cbe01834361d, type: 2}
   spottedMat: {fileID: 2100000, guid: ef774db0c07c0ea4dbdc8a4e4e70a309, type: 2}
-  mr: {fileID: 0}
+  mr: {fileID: 2966988290472659925}
 --- !u!114 &4291329084019316330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582691d526fcfd940aca1acbc299609b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toothPickup: {fileID: 1521807547397308944, guid: 371425e97974c384381248d19ad53d3b, type: 3}
 --- !u!1 &8235495464945166597
 GameObject:
   m_ObjectHideFlags: 0

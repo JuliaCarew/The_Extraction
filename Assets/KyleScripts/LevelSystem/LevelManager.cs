@@ -45,8 +45,5 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("All levels completed or index out of range.");
         }
-    }
-
-
-   
+    } 
 }
