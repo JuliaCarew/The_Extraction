@@ -43,7 +43,8 @@ public class GameplayScreen : UIScreen
             {
                 int minutes = Mathf.FloorToInt(timeCounter / 60);
                 int seconds = Mathf.FloorToInt(timeCounter % 60);
-                timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds); 
+                timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+                scoreManager.UpdateRoomClearedTime(seconds);
             }
 
             // Update detection percentage

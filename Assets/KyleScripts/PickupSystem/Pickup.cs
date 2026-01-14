@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour
@@ -5,7 +6,15 @@ public class Pickup : MonoBehaviour
     [SerializeField] public PickupType type;
     public static GameObject LastPickedUpWeapon { get; set; }
     public bool debugMode = false;
-    
+
+    private void OnEnable()
+    {
+        if (type == PickupType.Teeth)
+        {
+            StartCoroutine(MagnetizeToPlayer());
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (debugMode) Debug.Log($"Pickup: OnTriggerEnter called with {other.gameObject.name}, tag: {other.gameObject.tag}, type: {type}");
@@ -54,6 +63,21 @@ public class Pickup : MonoBehaviour
         else
         {
             if (debugMode) Debug.Log($"Pickup: Collision with non-Player object: {other.gameObject.name}");
+        }
+    }
+
+    private IEnumerator MagnetizeToPlayer()
+    {
+        // Slowly move the pickup towards the player over time
+        Transform playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (playerTransform == null)
+        {
+            yield break;
+        }
+        while (Vector3.Distance(transform.position, playerTransform.position) > 1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, Time.deltaTime * 5f);
+            yield return null;
         }
     }
 }
