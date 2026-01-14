@@ -5,7 +5,7 @@ public class PickUpController : MonoBehaviour
     public bool hasWeapon { get; private set; } = false;
     [SerializeField] private Transform weaponHolder;
 
-    public bool debugMode = false;
+    public bool debugMode = true;
 
     private void OnEnable()
     {
