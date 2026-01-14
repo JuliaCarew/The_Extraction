@@ -6,7 +6,11 @@ public class PausedState : GameStateSO
     public override void Enter()
     {
         Time.timeScale = 0f;
-        GameStateEvents.Instance.RaiseGamePaused();
+        Debug.Log($"PausedState.Enter() called - Time.timeScale set to: {Time.timeScale}");
+        if (GameStateEvents.Instance != null)
+        {
+            GameStateEvents.Instance.RaiseGamePaused();
+        }
     }
 
     public override void Exit()

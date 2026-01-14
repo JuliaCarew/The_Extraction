@@ -1541,6 +1541,17 @@ MonoBehaviour:
     screenObject: {fileID: 637716021}
   - state: 6
     screenObject: {fileID: 457963095}
+  stateMappings:
+  - gameState: 0
+    uiState: 1
+  - gameState: 1
+    uiState: 2
+  - gameState: 2
+    uiState: 3
+  - gameState: 4
+    uiState: 6
+  - gameState: 5
+    uiState: 4
   currentState: 1
 --- !u!4 &332311748
 Transform:
@@ -2995,6 +3006,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ca7c1dd985739cf4ea20694cc2893401, type: 2}
   - {fileID: 11400000, guid: 23a7b261e241d50489321e459100ef5b, type: 2}
   - {fileID: 11400000, guid: 417cd179db9651e47bd58f7a6835edd4, type: 2}
+  - {fileID: 11400000, guid: 3199f211cb9579a409c1073a6b986593, type: 2}
   debugMode: 1
 --- !u!43 &873465341
 Mesh:
@@ -7635,4 +7647,3 @@ SceneRoots:
   - {fileID: 2141940268}
   - {fileID: 440364575}
   - {fileID: 1148958733}
-  - {fileID: 949241966}

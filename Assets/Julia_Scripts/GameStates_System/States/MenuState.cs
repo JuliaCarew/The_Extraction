@@ -6,8 +6,11 @@ public class MenuState : GameStateSO
     public override void Enter()
     {
         Time.timeScale = 0f;
-        GameStateEvents.Instance.RaiseGameStarted();
-        Debug.Log("Entered MainMenu state");
+        Debug.Log($"MenuState.Enter() called - Time.timeScale set to: {Time.timeScale}");
+        if (GameStateEvents.Instance != null)
+        {
+            GameStateEvents.Instance.RaiseGameStarted();
+        }
     }
 
     public override void Exit()

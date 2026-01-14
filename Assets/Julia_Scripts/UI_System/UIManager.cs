@@ -22,10 +22,19 @@ public class UIManager : MonoBehaviour
         public GameObject screenObject;
     }
 
+    [System.Serializable]
+    public class StateMapping
+    {
+        public GameState gameState;
+        public UIState uiState;
+    }
+
     [SerializeField] private List<UIScreen> screens = new List<UIScreen>();
+    [SerializeField] private List<StateMapping> stateMappings = new List<StateMapping>();
     [SerializeField] private UIState currentState = UIState.None;
     
     private Dictionary<UIState, GameObject> screenDictionary = new Dictionary<UIState, GameObject>();
+    private Dictionary<GameState, UIState> gameToUIMapping = new Dictionary<GameState, UIState>();
 
     private void Awake()
     {
@@ -37,15 +46,40 @@ public class UIManager : MonoBehaviour
             if (screen.screenObject != null)
             {
                 screenDictionary[screen.state] = screen.screenObject;
-                // Hide all screens initially
                 screen.screenObject.SetActive(false);
             }
         }
 
-        // Show the initial state 
-        if (currentState != UIState.None)
+        // Initialize state mapping
+        gameToUIMapping.Clear();
+        foreach (var mapping in stateMappings)
         {
-            SetState(currentState);
+            gameToUIMapping[mapping.gameState] = mapping.uiState;
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (GameStateEvents.Instance != null)
+        {
+            GameStateEvents.Instance.StateChanged += HandleGameStateChanged;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (GameStateEvents.Instance != null)
+        {
+            GameStateEvents.Instance.StateChanged -= HandleGameStateChanged;
+        }
+    }
+
+    private void Start()
+    {
+        // Sync with initial game state
+        if (GameStateMachine.Instance != null)
+        {
+            HandleGameStateChanged(GameStateMachine.Instance.GetCurrentState());
         }
     }
 
@@ -54,7 +88,20 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ShowPause();
+            // Toggle pause
+            if (GameStateMachine.Instance != null)
+            {
+                GameState current = GameStateMachine.Instance.GetCurrentState();
+
+                if (current == GameState.Paused)
+                {
+                    GameStateMachine.Instance.ChangeState(GameState.Gameplay);
+                }
+                else if (current == GameState.Gameplay)
+                {
+                    GameStateMachine.Instance.ChangeState(GameState.Paused);
+                }
+            }
         }
     }
 
@@ -99,40 +146,26 @@ public class UIManager : MonoBehaviour
     }
 
     
-    public void ShowMainMenu()
+    public void ShowMainMenu(){ ChangeGameState(GameState.Menu); }
+    public void ShowGameplay(){ ChangeGameState(GameState.Gameplay); }
+    public void ShowPause(){ ChangeGameState(GameState.Paused); }
+    public void ShowSettings(){ ChangeGameState(GameState.Settings); }
+    public void ShowResults(){ ChangeGameState(GameState.Results); }
+
+    private void ChangeGameState(GameState newState)
     {
-        SetState(UIState.MainMenu);
-        GameStateMachine.Instance.ChangeState(GameState.Menu);
+        if (GameStateMachine.Instance != null)
+        {
+            GameStateMachine.Instance.ChangeState(newState);
+        }
     }
 
-    public void ShowGameplay()
+    private void HandleGameStateChanged(GameState newGameState)
     {
-        SetState(UIState.Gameplay);
-        GameStateMachine.Instance.ChangeState(GameState.Gameplay);
-    }
-
-    public void ShowPause()
-    {
-        SetState(UIState.Pause);
-        GameStateMachine.Instance.ChangeState(GameState.Paused);
-    }
-
-    public void ShowGameOver()
-    {
-        SetState(UIState.GameOver);
-        
-    }
-
-    public void ShowSettings()
-    {
-        SetState(UIState.Settings);
-        GameStateMachine.Instance.ChangeState(GameState.Settings);
-    }
-
-    public void ShowResults()
-    {
-        SetState(UIState.Results);
-        GameStateMachine.Instance.ChangeState(GameState.Results);
+        if (gameToUIMapping.ContainsKey(newGameState))
+        {
+            SetState(gameToUIMapping[newGameState]);
+        }
     }
 
     public void QuitGame()
