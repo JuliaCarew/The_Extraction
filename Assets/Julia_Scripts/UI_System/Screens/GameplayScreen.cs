@@ -8,8 +8,8 @@ public class GameplayScreen : UIScreen
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI detectionText;
 
-    private StatsTracker statsTracker;
-    private ScoreManager scoreManager;
+    [SerializeField] private StatsTracker statsTracker;
+    [SerializeField] private ScoreManager scoreManager;
 
     private void Start()
     {
