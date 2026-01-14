@@ -8,6 +8,8 @@ public class ScoreManager : MonoBehaviour
     private int moneyCollected = 0;
     private int stealthScore = 0;
     private float totalDetectionPercentage = 0f;
+    public float MaxDetectionPercentage { get { return maxDetectionPercentage;  } }
+    private float maxDetectionPercentage = 100f;
     public int EnemiesKilled { get { return enemiesKilled; } }
     private int enemiesKilled = 0;
 
@@ -47,6 +49,15 @@ public class ScoreManager : MonoBehaviour
         teethCollected++;
     }
 
+    public int GetTeethCollected()
+    {
+        return teethCollected;
+    }
+
+    public int GetMoney()
+    {
+        return moneyCollected;
+    }
     private void EnemyKilled()
     {
         enemiesKilled++;
