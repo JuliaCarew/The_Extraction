@@ -27,7 +27,7 @@ public class ScoreManager : MonoBehaviour
         // Subscribe to enemy died event, to increase stealth score.
         // Subscribe to tooth collected event.
         // Subscribe to money collected event.
-        PlayerEvents.Instance.RoomCleared += () => RoomCleared(0f);
+        //PlayerEvents.Instance.RoomCleared += () => RoomCleared(0f);
         PlayerEvents.Instance.toothCollected += CollectTooth;
         PlayerEvents.Instance.moneyCollected += CollectMoney;
         EnemyEvents.Instance.EnemyDiedWithDetection += OnEnemyDiedWithDetection;
@@ -38,7 +38,7 @@ public class ScoreManager : MonoBehaviour
     private void OnDestroy()
     {
         // Unsubscribe from stuff here.
-        PlayerEvents.Instance.RoomCleared -= () => RoomCleared(0f);
+        //PlayerEvents.Instance.RoomCleared -= () => RoomCleared(0f);
         PlayerEvents.Instance.toothCollected -= CollectTooth;
         PlayerEvents.Instance.moneyCollected -= CollectMoney;
         EnemyEvents.Instance.EnemyDiedWithDetection -= OnEnemyDiedWithDetection;
@@ -71,6 +71,11 @@ public class ScoreManager : MonoBehaviour
         Debug.Log("Total detection updated. now: " + totalDetectionPercentage);
     }
 
+    public void UpdateRoomClearedTime(int time)
+    {
+        roomClearedTime = time;
+    }
+
     private void CollectMoney()
     {
         moneyCollected++;
@@ -98,7 +103,7 @@ public class ScoreManager : MonoBehaviour
 
     private int CalculateTotalScore()
     {
-        return teethCollected + moneyCollected + stealthScore + roomClearedTime;
+        return (teethCollected * 50) - roomClearedTime - Mathf.RoundToInt(totalDetectionPercentage);
     }
 
     public int GetTotalScore()
@@ -109,6 +114,11 @@ public class ScoreManager : MonoBehaviour
     public float GetTotalDetectionPercentage()
     {
         return totalDetectionPercentage;
+    }
+
+    public int GetRoomClearedTime()
+    {
+        return roomClearedTime;
     }
 
     public void ResetValues() 
