@@ -41,6 +41,8 @@ public class LevelManager : MonoBehaviour
         {
             LevelDataSO nextLevel = levels[currentLevelIndex];
             levelLoader.ChangeScene(nextLevel.levelName);
+            scoreManager.ResetValues(); // reset data for the new level
+            Debug.Log("Loading next level: " + nextLevel.levelName);
         }
         else
         {
