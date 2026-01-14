@@ -41,15 +41,27 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
 
     private void OnDisable()
     {
-        UIEvents.Instance.Hover -= () => PlaySound(SoundId.UiHover);
-        UIEvents.Instance.Click -= () => PlaySound(SoundId.UiClick);
+        if (UIEvents.Instance != null)
+        {
+            UIEvents.Instance.Hover -= () => PlaySound(SoundId.UiHover);
+            UIEvents.Instance.Click -= () => PlaySound(SoundId.UiClick);
+        }
 
-        PlayerEvents.Instance.Died -= () => PlaySound(SoundId.PlayerDie);
+        if (PlayerEvents.Instance != null)
+        {
+            PlayerEvents.Instance.Died -= () => PlaySound(SoundId.PlayerDie);
+        }
 
-        EnemyEvents.Instance.Spawned -= _ => PlaySound(SoundId.EnemySpawned);
-        EnemyEvents.Instance.Died -= _ => PlaySound(SoundId.EnemyDie);
+        if (EnemyEvents.Instance != null)
+        {
+            EnemyEvents.Instance.Spawned -= _ => PlaySound(SoundId.EnemySpawned);
+            EnemyEvents.Instance.Died -= _ => PlaySound(SoundId.EnemyDie);
+        }
 
-        GameStateEvents.Instance.StateChanged -= OnGameStateChanged;
+        if (GameStateEvents.Instance != null)
+        {
+            GameStateEvents.Instance.StateChanged -= OnGameStateChanged;
+        }
     }
     #endregion
 

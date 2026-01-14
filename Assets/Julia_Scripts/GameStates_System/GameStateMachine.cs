@@ -38,11 +38,55 @@ public class GameStateMachine : SingletonBase<GameStateMachine>
         if (currentState?.Id == newState)
             return;
 
-        currentState?.Exit();
-        currentState = states[newState];
-        currentState.Enter();
+        if (!states.ContainsKey(newState))
+        {
+            return;
+        }
 
-        GameStateEvents.Instance.RaiseStateChanged(newState);
-        if (debugMode) Debug.Log($"Game State changed to: {newState}");
+        Debug.Log($"GameStateMachine: Changing from {currentState?.Id} to {newState}. Time.timeScale before: {Time.timeScale}");
+        
+        currentState?.Exit();
+        
+        currentState = states[newState];
+        if (currentState == null)
+        {
+            Debug.LogError($"GameStateMachine: State object for {newState} is null!");
+            return;
+        }
+        
+        try
+        {
+            currentState.Enter();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"GameStateMachine: Exception in Enter() method: {e.Message}\n{e.StackTrace}");
+        }
+
+        // Ensure timeScale is set correctly for pause / gameplay states
+        if (newState == GameState.Paused || newState == GameState.Menu)
+        {
+            if (Time.timeScale != 0f)
+            {
+                Time.timeScale = 0f;
+            }
+        }
+        else if (newState == GameState.Gameplay)
+        {
+            if (Time.timeScale != 1f)
+            {
+                Time.timeScale = 1f;
+            }
+        }
+
+        if (GameStateEvents.Instance != null)
+        {
+            GameStateEvents.Instance.RaiseStateChanged(newState);
+        }
+    }
+
+    public GameState GetCurrentState()
+    {
+        return currentState?.Id ?? GameState.Menu;
     }
 }
