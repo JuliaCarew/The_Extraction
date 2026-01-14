@@ -8,6 +8,7 @@ public class ScoreManager : MonoBehaviour
     private int moneyCollected = 0;
     private int stealthScore = 0;
     private float totalDetectionPercentage = 0f;
+    public int EnemiesKilled { get { return enemiesKilled; } }
     private int enemiesKilled = 0;
 
     private int TotalScore = 0;
@@ -28,6 +29,7 @@ public class ScoreManager : MonoBehaviour
         PlayerEvents.Instance.toothCollected += CollectTooth;
         PlayerEvents.Instance.moneyCollected += CollectMoney;
         EnemyEvents.Instance.EnemyDiedWithDetection += OnEnemyDiedWithDetection;
+        EnemyEvents.Instance.OnEnemyKilled += EnemyKilled;
     }
 
     private void OnDestroy()
@@ -37,6 +39,7 @@ public class ScoreManager : MonoBehaviour
         PlayerEvents.Instance.toothCollected -= CollectTooth;
         PlayerEvents.Instance.moneyCollected -= CollectMoney;
         EnemyEvents.Instance.EnemyDiedWithDetection -= OnEnemyDiedWithDetection;
+        EnemyEvents.Instance.OnEnemyKilled -= EnemyKilled;
     }
 
     private void CollectTooth()
