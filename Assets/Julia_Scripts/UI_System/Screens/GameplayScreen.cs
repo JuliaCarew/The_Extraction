@@ -58,7 +58,7 @@ public class GameplayScreen : UIScreen
                     if (detection >= scoreManager.MaxDetectionPercentage)
                     {
                         Debug.Log("detection is max detection percentage: " + scoreManager.MaxDetectionPercentage);
-                        StartCoroutine(ChangeToGameover());
+                        ChangeToGameover();
                     }
                     lastCheckedAwareness = detection;
                 }
