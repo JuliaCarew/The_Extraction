@@ -1,14 +1,16 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InteractibleUI : MonoBehaviour
+public class InteractibleUI : SingletonBase<InteractibleUI>
 {
     public TextMeshProUGUI keyText;
     public InteractableController interactableController;
 
     private void Update()
     {
+        if(interactableController == null) { interactableController = FindFirstObjectByType<InteractableController>(); }
         var interactible = interactableController.currentInteractable;
         if(interactible != null)
         {
