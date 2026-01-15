@@ -53,7 +53,9 @@ public class LevelManager : MonoBehaviour
     {
         scoreManager.ResetValues();
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        LevelDataSO nextLevel = levels[currentLevelIndex];
+        levelLoader.ChangeScene(nextLevel.levelName);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameStateMachine.Instance.ChangeState(GameState.Gameplay);
         Debug.Log("Retrying current level: " + SceneManager.GetActiveScene().name);
     }

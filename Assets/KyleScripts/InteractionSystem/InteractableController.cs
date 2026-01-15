@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InteractableController : MonoBehaviour
+public class InteractableController : SingletonBase<InteractableController>
 {
     [SerializeField] private float detectionDistance = 3f;
     [SerializeField] private LayerMask interactionLayer;

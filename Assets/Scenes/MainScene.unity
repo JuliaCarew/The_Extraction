@@ -1696,6 +1696,10 @@ PrefabInstance:
       propertyPath: m_fontColor.r
       value: 0.8867924
       objectReference: {fileID: 0}
+    - target: {fileID: 2167218901149703699, guid: f2abe705d67208b4a9650ffa9ef7728c, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4263189701473461589, guid: f2abe705d67208b4a9650ffa9ef7728c, type: 3}
       propertyPath: interactableController
       value: 
