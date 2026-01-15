@@ -11,13 +11,13 @@ public class LevelManager : MonoBehaviour
     private void OnEnable()
     {
         EnemyEvents.Instance.OnEnemyKilled += CheckLevelCompletion;
-        PlayerEvents.Instance.RoomCleared += LoadNextLevel;
+        //PlayerEvents.Instance.RoomCleared += LoadNextLevel;
     }
 
     private void OnDisable()
     {
         EnemyEvents.Instance.OnEnemyKilled -= CheckLevelCompletion;
-        PlayerEvents.Instance.RoomCleared -= LoadNextLevel;
+        //PlayerEvents.Instance.RoomCleared -= LoadNextLevel;
     }
 
 
@@ -25,8 +25,8 @@ public class LevelManager : MonoBehaviour
     {
         LevelDataSO currentLevel = levels[currentLevelIndex];
         Debug.Log(currentLevel.enemyCount + " enemies in level.");
-        Debug.Log(scoreManager.EnemiesKilled + " enemies killed so far.");
-        if (currentLevel.enemyCount == scoreManager.EnemiesKilled)
+        Debug.Log(scoreManager.GetEnemiesKilled() + " enemies killed so far.");
+        if (currentLevel.enemyCount == scoreManager.GetEnemiesKilled())
         {
             Debug.Log("Level completed!");
             currentLevel.ClearRoom();
@@ -37,12 +37,11 @@ public class LevelManager : MonoBehaviour
     public void LoadNextLevel()
     {
         RemoveAllEnemies(); // remove up all enemies before transitioning
-        currentLevelIndex++;
+        //currentLevelIndex++;
         if (currentLevelIndex < levels.Count) 
         {
             LevelDataSO nextLevel = levels[currentLevelIndex];
             levelLoader.ChangeScene(nextLevel.levelName);
-            scoreManager.ResetValues(); // reset data for the new level
             Debug.Log("Loading next level: " + nextLevel.levelName);
         }
         else

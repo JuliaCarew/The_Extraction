@@ -84,11 +84,6 @@ public class Pickup : MonoBehaviour
 
             yield return null;
         }
-        if (type == PickupType.Teeth)
-        {
-            PlayerEvents.Instance.ToothCollected();
-            Destroy(gameObject);
-        }
     }
 }
 

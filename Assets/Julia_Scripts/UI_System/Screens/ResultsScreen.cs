@@ -13,10 +13,11 @@ public class ResultsScreen : UIScreen
 
     [SerializeField] private ScoreManager scoreManager;
 
-    private void Start()
+    private void OnEnable()
     {
         if (scoreManager == null)
         {
+            scoreManager = FindFirstObjectByType<ScoreManager>();
             Debug.LogWarning("GameplayScreen: ScoreManager not found in scene!");
         }
     }

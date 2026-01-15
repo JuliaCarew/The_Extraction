@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d120f31e4ae68347879f35d628a6f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnpoint: {fileID: 0}
   inputManager: {fileID: 7546413748899803481}
   movSpeed: 4
   rb: {fileID: 6211349337540532704}
@@ -160,6 +161,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   playerController: {fileID: 3066818092879682021}
+  pickUpController: {fileID: 0}
   currentInteractable: {fileID: 0}
   offset: {x: 0, y: 1, z: 0}
 --- !u!114 &300371497588549114
@@ -175,6 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 3655583959006311984}
+  debugMode: 1
 --- !u!1001 &4273568862148462485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -577,7 +580,8 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5694380829203478484, guid: 69cca3dd64e8df94aa147f5c2ee33448, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
