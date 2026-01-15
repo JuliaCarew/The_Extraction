@@ -34,11 +34,13 @@ public class RadiusDetectionHandler : MonoBehaviour
                 if (GameStateMachine.Instance.GetCurrentState() == GameState.Gameplay)
                 {
                     EnemyEvents.Instance.EnemyDetectionChanged(0.1f);
+                    EnemyEvents.Instance.EnemySpottedPlayer();
                 }
                 mr.material = spottedMat;
             }
             else
             {
+                EnemyEvents.Instance.EnemyLostPlayer();
                 mr.material = normalMat;
             }
         }
