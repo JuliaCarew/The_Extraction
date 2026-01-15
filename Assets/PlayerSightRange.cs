@@ -31,7 +31,7 @@ public class PlayerSightRange : MonoBehaviour
         if (pulseCoroutine == null) pulseCoroutine = StartCoroutine(Pulse());
     }
 
-    private void DisablePlayerSightRadius()
+    public void DisablePlayerSightRadius()
     {
         playerSightRadius.enabled = false;
         if (pulseCoroutine != null)
