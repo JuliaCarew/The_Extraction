@@ -171,6 +171,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4104283590371295737}
   m_SourcePrefab: {fileID: 100100000, guid: 707a30d63ee668d4e8dae2e463f8a80d, type: 3}
+--- !u!23 &2494893858659234203 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7838853361208588280, guid: 707a30d63ee668d4e8dae2e463f8a80d, type: 3}
+  m_PrefabInstance: {fileID: 5644865378536982115}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7158643178968575531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3246544666608855112, guid: 707a30d63ee668d4e8dae2e463f8a80d, type: 3}
@@ -211,8 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0d65b3c7b491244a0a56e1c1817042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 5
-  viewThreshold: 0.98
+  detectionRadius: 15
+  viewThreshold: 0.78
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -221,7 +226,8 @@ MonoBehaviour:
     m_Bits: 256
   normalMat: {fileID: 2100000, guid: 277aaa40ad771e8488f8cbe01834361d, type: 2}
   spottedMat: {fileID: 2100000, guid: ef774db0c07c0ea4dbdc8a4e4e70a309, type: 2}
-  mr: {fileID: 0}
+  mr: {fileID: 2494893858659234203}
+  enemyPatrol: {fileID: 3777724534842633741}
 --- !u!114 &8131765748679315232
 MonoBehaviour:
   m_ObjectHideFlags: 0

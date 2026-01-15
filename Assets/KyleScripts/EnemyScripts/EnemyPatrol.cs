@@ -9,6 +9,7 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField] private float speed = 2f;
     [SerializeField] private float rotationSpeed = 5f;
     private Vector3 movementVector;
+    private Vector3 playerBias = Vector3.zero;
 
     private void Start()
     {

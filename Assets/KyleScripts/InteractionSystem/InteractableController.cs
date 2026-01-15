@@ -16,6 +16,7 @@ public class InteractableController : SingletonBase<InteractableController>
     [SerializeField] Vector3 offset;
     private BaseInteractable previousInteractable;
     private string originalPrompt = "";
+    [SerializeField] private PlayerSightRange playerSightRange;
 
     public bool hasWeapon => pickUpController != null && pickUpController.hasWeapon;
 
@@ -53,6 +54,7 @@ public class InteractableController : SingletonBase<InteractableController>
         foreach (var meshRenderer in meshRenderers)
         {
             meshRenderer.enabled = false;
+            meshRenderer.gameObject.layer = LayerMask.NameToLayer("Hidden");
         }
     }
 
@@ -140,6 +142,7 @@ public class InteractableController : SingletonBase<InteractableController>
         playerController.DisableMovement();
         isHidden = true;
         DisableMeshes();
+        playerSightRange.DisablePlayerSightRadius();
     }
 
     private void StopHiding()
