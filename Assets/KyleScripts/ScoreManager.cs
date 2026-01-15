@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : SingletonBase<ScoreManager>
 {
     private int teethCollected = 0;
     private int roomClearedTime = 0;
@@ -10,7 +10,6 @@ public class ScoreManager : MonoBehaviour
     public float totalDetectionPercentage = 0f;
     public float MaxDetectionPercentage { get { return maxDetectionPercentage;  } }
     private float maxDetectionPercentage = 100f;
-    public int EnemiesKilled { get { return enemiesKilled; } }
     private int enemiesKilled = 0;
 
     private int TotalScore = 0;
@@ -21,7 +20,7 @@ public class ScoreManager : MonoBehaviour
         set { TotalScore = Math.Max(0, value); }
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         // Subscribe to room cleared event to record time.
         // Subscribe to enemy died event, to increase stealth score.
@@ -35,7 +34,7 @@ public class ScoreManager : MonoBehaviour
         EnemyEvents.Instance.OnEnemyDetectionChanged += UpdateDetection;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         // Unsubscribe from stuff here.
         //PlayerEvents.Instance.RoomCleared -= () => RoomCleared(0f);
@@ -45,6 +44,7 @@ public class ScoreManager : MonoBehaviour
         EnemyEvents.Instance.OnEnemyKilled -= EnemyKilled;
         EnemyEvents.Instance.OnEnemyDetectionChanged -= UpdateDetection;
     }
+
 
     private void CollectTooth()
     {
@@ -127,5 +127,6 @@ public class ScoreManager : MonoBehaviour
         teethCollected = 0;
         moneyCollected = 0;
         stealthScore = 0;
+        enemiesKilled = 0;
     }
 }

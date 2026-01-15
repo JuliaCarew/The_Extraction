@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Room1
   m_EditorClassIdentifier: 
   enemyCount: 3
-  levelName: 
+  levelName: MainScene

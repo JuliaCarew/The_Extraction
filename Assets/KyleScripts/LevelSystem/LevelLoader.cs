@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : SingletonBase<LevelLoader>
 {
+    [SerializeField] private ScoreManager scoreManager;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -31,12 +32,12 @@ public class LevelLoader : SingletonBase<LevelLoader>
         {
             player.transform.position = spawnPoint.transform.position;
         }
+        scoreManager.ResetValues(); // reset data for the new level
     }
 
     public void LoadCurrentLevel() 
     {
         GameStateMachine.Instance.ChangeState(GameState.Gameplay); // change to gameplay state 
-        // Get the build index of the currently active scene
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         SceneManager.LoadScene(currentSceneIndex); 
