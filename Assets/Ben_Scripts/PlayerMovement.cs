@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Transform spawnpoint;
+    public Transform spawnpoint;
     [SerializeField] private InputManager inputManager;
 
     public float movSpeed = 4f;

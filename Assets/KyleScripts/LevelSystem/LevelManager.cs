@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -19,7 +20,6 @@ public class LevelManager : MonoBehaviour
         EnemyEvents.Instance.OnEnemyKilled -= CheckLevelCompletion;
         PlayerEvents.Instance.RoomCleared -= LoadNextLevel;
     }
-
 
     private void CheckLevelCompletion()
     {
@@ -50,8 +50,15 @@ public class LevelManager : MonoBehaviour
             Debug.Log("All levels completed or index out of range.");
         }
     }
-
    
+    public void RetryCurrentLevel()
+    {
+        scoreManager.ResetValues(); 
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("Retrying current level: " + SceneManager.GetActiveScene().name);
+    }
+
     public void RemoveAllEnemies()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");

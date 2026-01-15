@@ -1651,6 +1651,8 @@ MonoBehaviour:
   - gameState: 6
     uiState: 5
   currentState: 1
+  levelManager: {fileID: 2067400205}
+  playerMovement: {fileID: 408449402}
 --- !u!4 &332311748
 Transform:
   m_ObjectHideFlags: 0
@@ -1813,6 +1815,10 @@ PrefabInstance:
       propertyPath: movSpeed
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3066818092879682021, guid: 51fd05ed2f6ddb84da045735668e5b59, type: 3}
+      propertyPath: spawnpoint
+      value: 
+      objectReference: {fileID: 729489518}
     - target: {fileID: 8112607707979555444, guid: 51fd05ed2f6ddb84da045735668e5b59, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.12816048
@@ -2358,14 +2364,14 @@ PrefabInstance:
     - target: {fileID: 8066747167358724726, guid: b8381389feea33a46b604c48d073cde4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2067400204}
+      objectReference: {fileID: 332311747}
     - target: {fileID: 8066747167358724726, guid: b8381389feea33a46b604c48d073cde4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadCurrentLevel
+      value: RetryLevel
       objectReference: {fileID: 0}
     - target: {fileID: 8066747167358724726, guid: b8381389feea33a46b604c48d073cde4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelLoader, Assembly-CSharp
+      value: UIManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8066747167358724726, guid: b8381389feea33a46b604c48d073cde4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -2483,7 +2489,7 @@ GameObject:
   - component: {fileID: 729489518}
   - component: {fileID: 729489517}
   m_Layer: 0
-  m_Name: PlayerSpawnpoint
+  m_Name: Spawnpoint
   m_TagString: Spawnpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8571,13 +8577,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 332311747}
     - target: {fileID: 4170520258924384900, guid: 1b1219cf221ea4f49b6a08b36ff3a601, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170520258924384900, guid: 1b1219cf221ea4f49b6a08b36ff3a601, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 408449402}
+      objectReference: {fileID: 332311747}
+    - target: {fileID: 4170520258924384900, guid: 1b1219cf221ea4f49b6a08b36ff3a601, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RetryLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170520258924384900, guid: 1b1219cf221ea4f49b6a08b36ff3a601, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4170520258924384900, guid: 1b1219cf221ea4f49b6a08b36ff3a601, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 729489518}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170520258924384900, guid: 1b1219cf221ea4f49b6a08b36ff3a601, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4531772704306490013, guid: 1b1219cf221ea4f49b6a08b36ff3a601, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

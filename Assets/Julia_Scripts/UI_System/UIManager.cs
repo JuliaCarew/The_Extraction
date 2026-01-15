@@ -36,6 +36,8 @@ public class UIManager : MonoBehaviour
     private Dictionary<UIState, GameObject> screenDictionary = new Dictionary<UIState, GameObject>();
     private Dictionary<GameState, UIState> gameToUIMapping = new Dictionary<GameState, UIState>();
 
+    [SerializeField] private LevelManager levelManager;
+
     private void Awake()
     {
         // Initialize dictionary
@@ -147,10 +149,20 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOver() { ChangeGameState(GameState.GameOver); }
     public void ShowMainMenu(){ ChangeGameState(GameState.Menu); }
-    public void ShowGameplay(){ ChangeGameState(GameState.Gameplay); }
+    public void ShowGameplay() 
+    { 
+        levelManager.RetryCurrentLevel();
+        ChangeGameState(GameState.Gameplay); 
+    }
     public void ShowPause(){ ChangeGameState(GameState.Paused); }
     public void ShowSettings(){ ChangeGameState(GameState.Settings); }
     public void ShowResults(){ ChangeGameState(GameState.Results); }
+    
+    public void RetryLevel()
+    {
+        levelManager.RetryCurrentLevel();
+        ChangeGameState(GameState.Gameplay);
+    }
 
     private void ChangeGameState(GameState newState)
     {
