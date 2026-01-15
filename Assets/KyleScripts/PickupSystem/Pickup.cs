@@ -43,12 +43,8 @@ public class Pickup : MonoBehaviour
         {
             if (debugMode) Debug.Log($"Pickup: Player collision detected! Type: {type}");
             
-            if (type == PickupType.Teeth)
-            {
-                PlayerEvents.Instance.ToothCollected();
-                Destroy(gameObject);
-            }
-            else if (type == PickupType.Money)
+  
+            if (type == PickupType.Money)
             {
                 PlayerEvents.Instance.MoneyCollected();
                 Destroy(gameObject);
@@ -68,19 +64,26 @@ public class Pickup : MonoBehaviour
 
     private IEnumerator MagnetizeToPlayer()
     {
-        // Slowly move the pickup towards the player over time
         Transform playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
         if (playerTransform == null)
-        {
             yield break;
-        }
-        while (Vector3.Distance(transform.position, playerTransform.position) > 0.1f)
+
+        while (true)
         {
+            float distance = Vector3.Distance(transform.position, playerTransform.position);
+
+            if (distance <= 0.25f)
+            {
+                PlayerEvents.Instance.ToothCollected();
+                Destroy(gameObject);
+                yield break;
+            }
+
             transform.position = Vector3.MoveTowards(
-             transform.position,
-             playerTransform.position,
-             Time.unscaledDeltaTime * 5f
-         );
+                transform.position,
+                playerTransform.position,
+                Time.unscaledDeltaTime * 5f
+            );
 
             yield return null;
         }
