@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.SceneManagement;
 
 public class GameplayScreen : UIScreen
 {
@@ -15,7 +16,16 @@ public class GameplayScreen : UIScreen
     private float timeCounter; 
 
     public float lastCheckedAwareness;
-    
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
     private void Start()
     {
@@ -26,6 +36,11 @@ public class GameplayScreen : UIScreen
 
         timeCounter = 0;
         lastCheckedAwareness = 0f;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        timeCounter = 0;
     }
 
     private void Update()
