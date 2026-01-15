@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -19,8 +20,6 @@ public class LevelManager : MonoBehaviour
         EnemyEvents.Instance.OnEnemyKilled -= CheckLevelCompletion;
         //PlayerEvents.Instance.RoomCleared -= LoadNextLevel;
     }
-
-
     private void CheckLevelCompletion()
     {
         LevelDataSO currentLevel = levels[currentLevelIndex];
@@ -50,7 +49,15 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-   
+   public void RetryCurrentLevel()
+    {
+        scoreManager.ResetValues();
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameStateMachine.Instance.ChangeState(GameState.Gameplay);
+        Debug.Log("Retrying current level: " + SceneManager.GetActiveScene().name);
+    }
+
     public void RemoveAllEnemies()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");

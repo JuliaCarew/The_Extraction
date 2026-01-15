@@ -13,7 +13,7 @@ public enum UIState
     Settings
 }
 
-public class UIManager : MonoBehaviour
+public class UIManager : SingletonBase<UIManager>
 {
     [System.Serializable]
     public class UIScreen
@@ -35,9 +35,11 @@ public class UIManager : MonoBehaviour
     
     private Dictionary<UIState, GameObject> screenDictionary = new Dictionary<UIState, GameObject>();
     private Dictionary<GameState, UIState> gameToUIMapping = new Dictionary<GameState, UIState>();
+    public LevelManager levelManager;
 
     private void Awake()
     {
+        base.Awake();
         // Initialize dictionary
         screenDictionary.Clear();
         
@@ -147,10 +149,19 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOver() { ChangeGameState(GameState.GameOver); }
     public void ShowMainMenu(){ ChangeGameState(GameState.Menu); }
-    public void ShowGameplay(){ ChangeGameState(GameState.Gameplay); }
+    public void ShowGameplay()
+    { 
+        levelManager.RetryCurrentLevel();
+        ChangeGameState(GameState.Gameplay); 
+    }
     public void ShowPause(){ ChangeGameState(GameState.Paused); }
     public void ShowSettings(){ ChangeGameState(GameState.Settings); }
     public void ShowResults(){ ChangeGameState(GameState.Results); }
+
+    public void Retry()
+    {
+        levelManager.RetryCurrentLevel();
+    }
 
     private void ChangeGameState(GameState newState)
     {

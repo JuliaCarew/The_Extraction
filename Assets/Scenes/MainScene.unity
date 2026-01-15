@@ -1651,6 +1651,7 @@ MonoBehaviour:
   - gameState: 6
     uiState: 5
   currentState: 1
+  levelManager: {fileID: 2067400205}
 --- !u!4 &332311748
 Transform:
   m_ObjectHideFlags: 0
@@ -1663,7 +1664,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1865909598}
   m_Father: {fileID: 961710619}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &344748814
@@ -2387,14 +2389,14 @@ PrefabInstance:
     - target: {fileID: 8066747167358724726, guid: b8381389feea33a46b604c48d073cde4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2067400204}
+      objectReference: {fileID: 332311747}
     - target: {fileID: 8066747167358724726, guid: b8381389feea33a46b604c48d073cde4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadCurrentLevel
+      value: Retry
       objectReference: {fileID: 0}
     - target: {fileID: 8066747167358724726, guid: b8381389feea33a46b604c48d073cde4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelLoader, Assembly-CSharp
+      value: UIManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8066747167358724726, guid: b8381389feea33a46b604c48d073cde4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -7827,7 +7829,7 @@ RectTransform:
   - {fileID: 637716020}
   - {fileID: 2124540654103367747}
   - {fileID: 47542844}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 332311748}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8607,14 +8609,14 @@ PrefabInstance:
     - target: {fileID: 4170520258924384900, guid: 1b1219cf221ea4f49b6a08b36ff3a601, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2067400204}
+      objectReference: {fileID: 332311747}
     - target: {fileID: 4170520258924384900, guid: 1b1219cf221ea4f49b6a08b36ff3a601, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadCurrentLevel
+      value: Retry
       objectReference: {fileID: 0}
     - target: {fileID: 4170520258924384900, guid: 1b1219cf221ea4f49b6a08b36ff3a601, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelLoader, Assembly-CSharp
+      value: UIManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4170520258924384900, guid: 1b1219cf221ea4f49b6a08b36ff3a601, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -8778,7 +8780,6 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 961710619}
-  - {fileID: 1865909598}
   - {fileID: 1857415242}
   - {fileID: 1104160087}
   - {fileID: 408449401}
