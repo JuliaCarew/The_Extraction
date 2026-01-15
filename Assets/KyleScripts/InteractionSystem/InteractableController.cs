@@ -63,6 +63,7 @@ public class InteractableController : SingletonBase<InteractableController>
         foreach (var meshRenderer in meshRenderers)
         {
             meshRenderer.enabled = true;
+            meshRenderer.gameObject.layer = LayerMask.NameToLayer("Player");
         }
     }
 
