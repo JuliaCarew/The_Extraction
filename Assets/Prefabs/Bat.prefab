@@ -123,4 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f28a5d70b80f5b4d88676e624aef122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  weaponPickupActionData: {fileID: 11400000, guid: 377eff4dda3f17e46ba1c7f2dd0ae17e, type: 2}
+  type: 1
+  debugMode: 1
