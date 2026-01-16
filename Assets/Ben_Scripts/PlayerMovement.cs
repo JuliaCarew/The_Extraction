@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         // Move
         rb.linearVelocity = moveDirection * movSpeed;
 
-        // Rotate to face movement direction
+        // Rotate to face movement movementVector
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
         rb.MoveRotation(Quaternion.Slerp(
             rb.rotation,

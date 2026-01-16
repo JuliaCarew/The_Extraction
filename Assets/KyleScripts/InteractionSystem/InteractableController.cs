@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class InteractableController : SingletonBase<InteractableController>
 {
-    [SerializeField] private float detectionDistance = 3f;
+    [SerializeField] private float detectionRadius = 1.5f;
     [SerializeField] private LayerMask interactionLayer;
     [SerializeField] private LayerMask hiddenLayer;
     [SerializeField] private PlayerMovement playerController;
@@ -17,11 +17,13 @@ public class InteractableController : SingletonBase<InteractableController>
     private BaseInteractable previousInteractable;
     private string originalPrompt = "";
     [SerializeField] private PlayerSightRange playerSightRange;
+    private Collider[] interactionResults = new Collider[5];
 
     public bool hasWeapon => pickUpController != null && pickUpController.hasWeapon;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         input = GetComponentInChildren<InputManager>();
         meshRenderers = GetComponentsInChildren<MeshRenderer>(true);
         
@@ -69,17 +71,19 @@ public class InteractableController : SingletonBase<InteractableController>
 
     private void DetectInteractable()
     {
-        if (Physics.Raycast(transform.position + offset, transform.forward, out RaycastHit hit, detectionDistance, interactionLayer))
+        Vector3 center = transform.position + (transform.forward * offset.z) + (transform.up * offset.y);
+        int hitCount = Physics.OverlapSphereNonAlloc(center, detectionRadius, interactionResults, interactionLayer);
+        if (hitCount > 0)
         {
-            currentInteractable = hit.collider.GetComponent<BaseInteractable>();
-                
+            currentInteractable = interactionResults[0].GetComponent<BaseInteractable>();
+
             // store original prompt
             if (currentInteractable != null && currentInteractable != previousInteractable)
             {
                 originalPrompt = currentInteractable.GetInteractionPrompt();
                 previousInteractable = currentInteractable;
             }
-                
+
             // update interaction prompt based on weapon status
             UpdateInteractionPrompt();
         }
@@ -158,6 +162,8 @@ public class InteractableController : SingletonBase<InteractableController>
 
     private void OnDrawGizmos()
     {
+        Vector3 detectionCenter = transform.position + (transform.forward * offset.z) + (transform.up * offset.y);
+
         if (currentInteractable != null)
         {
             Gizmos.color = Color.green;
@@ -166,6 +172,6 @@ public class InteractableController : SingletonBase<InteractableController>
         {
             Gizmos.color = Color.red;
         }
-        Gizmos.DrawRay(transform.position + offset, transform.forward * detectionDistance);
+        Gizmos.DrawWireSphere(detectionCenter, detectionRadius);
     }
 }
