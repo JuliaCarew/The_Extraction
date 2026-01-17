@@ -158,6 +158,9 @@ GameObject:
   - component: {fileID: 6996711621396002641}
   - component: {fileID: 752456282405823159}
   - component: {fileID: 300371497588549114}
+  - component: {fileID: 8491885056243441803}
+  - component: {fileID: 4441756637498250670}
+  - component: {fileID: 2313490528103428131}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -265,6 +268,8 @@ MonoBehaviour:
     m_Bits: 256
   playerController: {fileID: 3066818092879682021}
   pickUpController: {fileID: 300371497588549114}
+  interactibleTextGameObject: {fileID: 0}
+  interactibleTextGameObjectName: InteractibleUI
   currentInteractable: {fileID: 0}
   offset: {x: 0, y: 1, z: 0}
 --- !u!114 &300371497588549114
@@ -281,6 +286,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 3655583959006311984}
   debugMode: 1
+--- !u!114 &8491885056243441803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538835741573915288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3711b4eb3d2f108499607c7ab71cecb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxToothCapacity: 3
+--- !u!114 &4441756637498250670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538835741573915288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 097ed6f5a2a7a9349ac54f1665a82328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffConfigurations: []
+--- !u!114 &2313490528103428131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538835741573915288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae67357d9f4a1564998bb05f6e31aa5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 3066818092879682021}
 --- !u!1001 &4273568862148462485
 PrefabInstance:
   m_ObjectHideFlags: 0
