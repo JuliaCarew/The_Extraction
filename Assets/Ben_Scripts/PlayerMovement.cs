@@ -18,8 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float turnSmoothTime = 0.1f;
 
     // Input Variables
-    public Vector2 moveInput; 
- 
+    public Vector2 moveInput;
 
     private void FixedUpdate()
     {
@@ -69,10 +68,11 @@ public class PlayerMovement : MonoBehaviour
         moveInput = new Vector2(inputVector.x, inputVector.y);
     }
 
-    public void ResetPlayerToSpawn(Transform spawn)
+    public void ResetPlayerToSpawn()
     {
-        transform.position = spawn.transform.position;
-        Debug.Log("Reset player's position to: " + spawn.transform.position);
+        spawnpoint = GameObject.Find("PlayerSpawnpoint").transform;
+        transform.position = spawnpoint.transform.position;
+        Debug.Log("Reset player's position to: " + spawnpoint.transform.position);
         GameStateEvents.Instance.RaiseStateChanged(GameState.Gameplay); // change to gameplay state
         canMove = true;
         Time.timeScale = 1f;

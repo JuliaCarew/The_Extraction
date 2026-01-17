@@ -26,7 +26,7 @@ public class LevelLoader : SingletonBase<LevelLoader>
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Transform spawnPoint = GameObject.Find("SpawnPoint")?.transform;
+        Transform spawnPoint = GameObject.Find("PlayerSpawnpoint")?.transform;
         GameObject player = GameObject.FindWithTag("Player");
         if (spawnPoint != null && player != null)
         {

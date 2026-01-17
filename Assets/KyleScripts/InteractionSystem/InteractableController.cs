@@ -33,18 +33,14 @@ public class InteractableController : SingletonBase<InteractableController>
     private Collider[] interactionResults = new Collider[5];
 
     public bool hasWeapon => pickUpController != null && pickUpController.hasWeapon;
+    #endregion
 
     protected override void Awake()
-
-    public bool hasWeapon => pickUpController != null && pickUpController.hasWeapon;
-
-    #endregion
-    private void Awake()
     {
         base.Awake();
         input = GetComponentInChildren<InputManager>();
         meshRenderers = GetComponentsInChildren<MeshRenderer>(true);
-        
+
         if (pickUpController == null)
         {
             pickUpController = GetComponent<PickUpController>();
@@ -53,11 +49,11 @@ public class InteractableController : SingletonBase<InteractableController>
                 pickUpController = GetComponentInParent<PickUpController>();
             }
         }
-        
+
         // Try to find interactible UI if reference is lost
         FindInteractibleUI();
     }
-    
+
     private void FindInteractibleUI()
     {
         // If reference exists, we're good
@@ -65,7 +61,7 @@ public class InteractableController : SingletonBase<InteractableController>
         {
             return;
         }
-        
+
         // Try to find by name
         if (!string.IsNullOrEmpty(interactibleTextGameObjectName))
         {
@@ -76,7 +72,7 @@ public class InteractableController : SingletonBase<InteractableController>
                 return;
             }
         }
-        
+
         // Try to find InteractibleUI singleton
         InteractibleUI interactibleUI = FindObjectOfType<InteractibleUI>();
         if (interactibleUI != null)
@@ -86,7 +82,7 @@ public class InteractableController : SingletonBase<InteractableController>
             return;
         }
     }
-    
+
     private GameObject GetInteractibleUI()
     {
         // If reference is null, try to find it again
@@ -94,7 +90,7 @@ public class InteractableController : SingletonBase<InteractableController>
         {
             FindInteractibleUI();
         }
-        
+
         return interactibleTextGameObject;
     }
 
@@ -158,7 +154,7 @@ public class InteractableController : SingletonBase<InteractableController>
     {
         if (currentInteractable == null)
             return false;
-            
+
         return currentInteractable.gameObject.CompareTag("Enemy");
     }
 
@@ -182,7 +178,7 @@ public class InteractableController : SingletonBase<InteractableController>
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        if (isHidden) 
+        if (isHidden)
         {
             StopHiding();
         }
@@ -195,7 +191,7 @@ public class InteractableController : SingletonBase<InteractableController>
                 {
                     return;
                 }
-                
+
                 // Store enemy position before interaction 
                 bool wasEnemy = IsEnemyInteractable();
                 Vector3? enemyPosition = null;
@@ -203,9 +199,9 @@ public class InteractableController : SingletonBase<InteractableController>
                 {
                     enemyPosition = currentInteractable.transform.position;
                 }
-                
+
                 currentInteractable.Interact();
-                
+
                 // Show kill action text if enemy was killed
                 if (wasEnemy)
                 {
@@ -225,14 +221,14 @@ public class InteractableController : SingletonBase<InteractableController>
         playerController.DisableMovement();
         isHidden = true;
         DisableMeshes();
-        
+
         // Disable interactible text UI when hiding
         GameObject interactibleUI = GetInteractibleUI();
         if (interactibleUI != null)
         {
             interactibleUI.SetActive(false);
         }
-        
+
         // Show hide action text 
         if (hideActionData != null && ActionTextManager.Instance != null)
         {
@@ -247,7 +243,7 @@ public class InteractableController : SingletonBase<InteractableController>
         playerController.EnableMovement();
         isHidden = false;
         EnableMeshes();
-        
+
         // Re-enable interactible text UI when stopping hiding
         GameObject interactibleUI = GetInteractibleUI();
         if (interactibleUI != null)
@@ -271,3 +267,4 @@ public class InteractableController : SingletonBase<InteractableController>
         Gizmos.DrawWireSphere(detectionCenter, detectionRadius);
     }
 }
+
