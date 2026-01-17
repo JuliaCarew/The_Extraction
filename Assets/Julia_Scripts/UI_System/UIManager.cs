@@ -151,7 +151,11 @@ public class UIManager : SingletonBase<UIManager>
     public void ShowMainMenu(){ ChangeGameState(GameState.Menu); }
     public void ShowGameplay()
     { 
-        levelManager.RetryCurrentLevel();
+        // if not in pause state
+        if(GameStateMachine.Instance != null && GameStateMachine.Instance.GetCurrentState() != GameState.Paused)
+        {
+            levelManager.RetryCurrentLevel();
+        }
         ChangeGameState(GameState.Gameplay); 
     }
     public void ShowPause(){ ChangeGameState(GameState.Paused); }

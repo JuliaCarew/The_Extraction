@@ -13,6 +13,7 @@ public class ScoreManager : SingletonBase<ScoreManager>
     private int enemiesKilled = 0;
 
     private int TotalScore = 0;
+    private int lastThresholdCrossed = 0; // Tracks the last 5% threshold of detection forr tooth deay
 
     public int totalScore
     {
@@ -51,6 +52,15 @@ public class ScoreManager : SingletonBase<ScoreManager>
         teethCollected++;
     }
 
+    private void RemoveTooth()
+    {
+        if (teethCollected > 0)
+        {
+            teethCollected--;
+            Debug.Log($"Tooth lost due to detection! Remaining teeth: {teethCollected}");
+        }
+    }
+
     public int GetTeethCollected()
     {
         return teethCollected;
@@ -69,6 +79,28 @@ public class ScoreManager : SingletonBase<ScoreManager>
     {
         totalDetectionPercentage += awareness;
         Debug.Log("Total detection updated. now: " + totalDetectionPercentage);
+        
+        // Check if we've crossed a new 5% threshold
+        CheckForToothLoss();
+    }
+    
+    private void CheckForToothLoss()
+    {
+        // Calculate for the 5% threshold crossed
+        int currentThreshold = Mathf.FloorToInt(totalDetectionPercentage / 5f);
+        
+        // If a new threshold is crossed, remove a tooth
+        if (currentThreshold > lastThresholdCrossed)
+        {
+            int thresholdsCrossed = currentThreshold - lastThresholdCrossed;
+            lastThresholdCrossed = currentThreshold;
+            
+            // Remove one tooth for each threshold crossed 
+            for (int i = 0; i < thresholdsCrossed; i++)
+            {
+                RemoveTooth();
+            }
+        }
     }
 
     public void UpdateRoomClearedTime(int time)
@@ -89,6 +121,8 @@ public class ScoreManager : SingletonBase<ScoreManager>
     private void OnEnemyDiedWithDetection(float detectionLevel)
     {
         totalDetectionPercentage += detectionLevel;
+        // Check for tooth loss when detection changes from enemy death
+        CheckForToothLoss();
     }
 
     private void RoomCleared(float timeTaken)
@@ -128,5 +162,6 @@ public class ScoreManager : SingletonBase<ScoreManager>
         moneyCollected = 0;
         stealthScore = 0;
         enemiesKilled = 0;
+        lastThresholdCrossed = 0;
     }
 }
