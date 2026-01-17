@@ -6,7 +6,7 @@ using UnityEngine;
 public class RadiusDetectionHandler : MonoBehaviour
 {
     [SerializeField] private float detectionRadius = 5f;
-    [SerializeField] private float viewThreshold = 0.7f;
+    [SerializeField] private float viewThreshold = 0.6f;
     [SerializeField] private LayerMask targetLayer;
     [SerializeField] private LayerMask obstructionLayer;
     [SerializeField] private Material normalMat;
@@ -14,6 +14,7 @@ public class RadiusDetectionHandler : MonoBehaviour
     [SerializeField] private MeshRenderer mr;
 
     private Collider[] results = new Collider[1];
+    [SerializeField] private EnemyPatrol enemyPatrol;
 
     private void Update()
     {
