@@ -6,16 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class GameplayScreen : UIScreen
 {
+    #region Variables
+
+    [Header("UI References")]
     [SerializeField] private TextMeshProUGUI teethText;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI detectionText;
 
-    //[SerializeField] private StatsTracker statsTracker;
     [SerializeField] private ScoreManager scoreManager;
 
     private float timeCounter; 
-
     public float lastCheckedAwareness;
+
+    #endregion
 
     private void OnEnable()
     {

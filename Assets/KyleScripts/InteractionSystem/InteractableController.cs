@@ -4,17 +4,30 @@ using UnityEngine.InputSystem;
 public class InteractableController : SingletonBase<InteractableController>
 {
     [SerializeField] private float detectionRadius = 1.5f;
+    #region Variables 
+
+    [Header("Action Text Definitions")]
+    [SerializeField] private ActionTextSO killActionData;
+    [SerializeField] private ActionTextSO hideActionData;
+
+    [Header("Interaction Detection")]
+    [SerializeField] private float detectionDistance = 3f;
     [SerializeField] private LayerMask interactionLayer;
     [SerializeField] private LayerMask hiddenLayer;
+
+    [Header("References")]
     [SerializeField] private PlayerMovement playerController;
     [SerializeField] private PickUpController pickUpController;
-
-    public BaseInteractable currentInteractable;
+    [SerializeField] private GameObject interactibleTextGameObject;
+    [SerializeField] private string interactibleTextGameObjectName = "InteractibleUI"; // Name to search for if reference is lost
     private InputManager input;
+
+    [Header("Interactible Settings")]
+    public BaseInteractable currentInteractable;
+    private BaseInteractable previousInteractable;
     private MeshRenderer[] meshRenderers;
     private bool isHidden = false;
     [SerializeField] Vector3 offset;
-    private BaseInteractable previousInteractable;
     private string originalPrompt = "";
     [SerializeField] private PlayerSightRange playerSightRange;
     private Collider[] interactionResults = new Collider[5];
@@ -22,6 +35,11 @@ public class InteractableController : SingletonBase<InteractableController>
     public bool hasWeapon => pickUpController != null && pickUpController.hasWeapon;
 
     protected override void Awake()
+
+    public bool hasWeapon => pickUpController != null && pickUpController.hasWeapon;
+
+    #endregion
+    private void Awake()
     {
         base.Awake();
         input = GetComponentInChildren<InputManager>();
@@ -35,6 +53,49 @@ public class InteractableController : SingletonBase<InteractableController>
                 pickUpController = GetComponentInParent<PickUpController>();
             }
         }
+        
+        // Try to find interactible UI if reference is lost
+        FindInteractibleUI();
+    }
+    
+    private void FindInteractibleUI()
+    {
+        // If reference exists, we're good
+        if (interactibleTextGameObject != null)
+        {
+            return;
+        }
+        
+        // Try to find by name
+        if (!string.IsNullOrEmpty(interactibleTextGameObjectName))
+        {
+            GameObject found = GameObject.Find(interactibleTextGameObjectName);
+            if (found != null)
+            {
+                interactibleTextGameObject = found;
+                return;
+            }
+        }
+        
+        // Try to find InteractibleUI singleton
+        InteractibleUI interactibleUI = FindObjectOfType<InteractibleUI>();
+        if (interactibleUI != null)
+        {
+            interactibleTextGameObject = interactibleUI.gameObject;
+            Debug.Log($"[InteractableController] Found interactible UI GameObject through InteractibleUI component");
+            return;
+        }
+    }
+    
+    private GameObject GetInteractibleUI()
+    {
+        // If reference is null, try to find it again
+        if (interactibleTextGameObject == null)
+        {
+            FindInteractibleUI();
+        }
+        
+        return interactibleTextGameObject;
     }
 
     private void OnEnable()
@@ -65,7 +126,6 @@ public class InteractableController : SingletonBase<InteractableController>
         foreach (var meshRenderer in meshRenderers)
         {
             meshRenderer.enabled = true;
-            meshRenderer.gameObject.layer = LayerMask.NameToLayer("Player");
         }
     }
 
@@ -136,7 +196,25 @@ public class InteractableController : SingletonBase<InteractableController>
                     return;
                 }
                 
+                // Store enemy position before interaction 
+                bool wasEnemy = IsEnemyInteractable();
+                Vector3? enemyPosition = null;
+                if (wasEnemy && killActionData != null)
+                {
+                    enemyPosition = currentInteractable.transform.position;
+                }
+                
                 currentInteractable.Interact();
+                
+                // Show kill action text if enemy was killed
+                if (wasEnemy)
+                {
+                    if (killActionData != null && enemyPosition.HasValue && ActionTextManager.Instance != null)
+                    {
+                        Debug.Log($"[InteractableController] Calling ShowActionText for kill at position: {enemyPosition.Value}");
+                        ActionTextManager.Instance.ShowActionText(killActionData, enemyPosition.Value);
+                    }
+                }
             }
         }
     }
@@ -147,7 +225,20 @@ public class InteractableController : SingletonBase<InteractableController>
         playerController.DisableMovement();
         isHidden = true;
         DisableMeshes();
-        playerSightRange.DisablePlayerSightRadius();
+        
+        // Disable interactible text UI when hiding
+        GameObject interactibleUI = GetInteractibleUI();
+        if (interactibleUI != null)
+        {
+            interactibleUI.SetActive(false);
+        }
+        
+        // Show hide action text 
+        if (hideActionData != null && ActionTextManager.Instance != null)
+        {
+            Debug.Log($"[InteractableController] Calling ShowActionText for hide (screen center)");
+            ActionTextManager.Instance.ShowActionText(hideActionData, null);
+        }
     }
 
     private void StopHiding()
@@ -156,9 +247,14 @@ public class InteractableController : SingletonBase<InteractableController>
         playerController.EnableMovement();
         isHidden = false;
         EnableMeshes();
+        
+        // Re-enable interactible text UI when stopping hiding
+        GameObject interactibleUI = GetInteractibleUI();
+        if (interactibleUI != null)
+        {
+            interactibleUI.SetActive(true);
+        }
     }
-
-
 
     private void OnDrawGizmos()
     {

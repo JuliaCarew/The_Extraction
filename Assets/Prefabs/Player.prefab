@@ -254,6 +254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c03e96189fcb74e89ae63d498aca37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killActionData: {fileID: 11400000, guid: 99938672dab4960409a96a2344b16a6e, type: 2}
+  hideActionData: {fileID: 11400000, guid: f2c450ea31246b34ebc8494140dc0300, type: 2}
   detectionDistance: 1.5
   interactionLayer:
     serializedVersion: 2
