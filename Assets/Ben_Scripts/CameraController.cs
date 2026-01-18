@@ -89,8 +89,6 @@ public class CameraController : MonoBehaviour
     private void OnDisable()
     {
         inputManager.ChangeCameraInputEvent -= IncreasingIndex; 
-    }
-
-
+    }    
 
 }
