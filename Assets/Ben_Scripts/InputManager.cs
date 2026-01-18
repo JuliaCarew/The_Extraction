@@ -11,7 +11,8 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerMovementActions
     public event Action<Vector2> MoveInputEvent;
     public event Action<InputAction.CallbackContext> InteractInputEvent;
     public event Action<InputAction.CallbackContext> PauseInputEvent;
-    public event Action ChangeCameraInputEvent; 
+    public event Action ChangeCameraInputEvent;
+    public event Action<InputAction.CallbackContext> PlaceObjectInputEvent;
 
 
     private Inputs inputs;
@@ -57,6 +58,14 @@ public class InputManager : MonoBehaviour, Inputs.IPlayerMovementActions
         if (context.started) 
         {
             ChangeCameraInputEvent?.Invoke(); 
+        }
+    }
+
+    public void OnPlace(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            PlaceObjectInputEvent?.Invoke(context);
         }
     }
 }

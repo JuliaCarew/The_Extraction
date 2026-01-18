@@ -7,6 +7,7 @@ public class HideInteraction : BaseInteractable{
         // Ideally an event would trigger here to notify interaction controller... but for now
         InteractableController interaction = GameObject.Find("Player").GetComponent<InteractableController>();
         interaction.Hide();
+        PlayerEvents.Instance.PlayerEnterHidingSpot();
         Debug.Log("Interacting with Trash can for example.");
     }
 

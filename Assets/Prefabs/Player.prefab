@@ -254,6 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c03e96189fcb74e89ae63d498aca37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRadius: 1.5
   killActionData: {fileID: 11400000, guid: 99938672dab4960409a96a2344b16a6e, type: 2}
   hideActionData: {fileID: 11400000, guid: f2c450ea31246b34ebc8494140dc0300, type: 2}
   detectionDistance: 1.5
@@ -265,8 +266,11 @@ MonoBehaviour:
     m_Bits: 256
   playerController: {fileID: 3066818092879682021}
   pickUpController: {fileID: 300371497588549114}
+  interactibleTextGameObject: {fileID: 0}
+  interactibleTextGameObjectName: InteractibleUI
   currentInteractable: {fileID: 0}
   offset: {x: 0, y: 1, z: 0}
+  playerSightRange: {fileID: 0}
 --- !u!114 &300371497588549114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,37 +747,8 @@ PrefabInstance:
     - {fileID: 5694380829203478484, guid: 69cca3dd64e8df94aa147f5c2ee33448, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7885787669009090120, guid: 69cca3dd64e8df94aa147f5c2ee33448, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4393134743198841038}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69cca3dd64e8df94aa147f5c2ee33448, type: 3}
---- !u!1 &3261630905020121889 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7885787669009090120, guid: 69cca3dd64e8df94aa147f5c2ee33448, type: 3}
-  m_PrefabInstance: {fileID: 4624165596925805929}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &4393134743198841038
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3261630905020121889}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: -0.000000059604645, z: 0.00000011920929}
 --- !u!4 &3655583959006311984 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8257182938395292505, guid: 69cca3dd64e8df94aa147f5c2ee33448, type: 3}

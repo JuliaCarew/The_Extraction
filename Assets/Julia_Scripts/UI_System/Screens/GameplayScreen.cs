@@ -44,6 +44,7 @@ public class GameplayScreen : UIScreen
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         timeCounter = 0;
+        timerText.text = "00:00";
     }
 
     private void Update()

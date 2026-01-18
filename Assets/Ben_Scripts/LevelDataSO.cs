@@ -5,6 +5,7 @@ public class LevelDataSO : ScriptableObject
 {
     public int enemyCount;
     public string levelName;
+    public int placeObjectCount;
     // This will collect the necesary info on each level (Room)
     // this script is still in development
     

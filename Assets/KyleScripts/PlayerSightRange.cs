@@ -25,7 +25,7 @@ public class PlayerSightRange : MonoBehaviour
         EnemyEvents.Instance.LostPlayer -= DisablePlayerSightRadius;
     }
 
-    private void EnablePlayerSightRadius()
+    public void EnablePlayerSightRadius()
     {
         playerSightRadius.enabled = true;
         if (pulseCoroutine == null) pulseCoroutine = StartCoroutine(Pulse());

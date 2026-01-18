@@ -29,6 +29,7 @@ public class RadiusDetectionHandler : MonoBehaviour
         {
             Transform target = results[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
+            float distanceToTarget = Vector3.Distance(transform.position, target.position);
             float distance = directionToTarget.magnitude;
             directionToTarget.y = 0;
             directionToTarget.Normalize();
@@ -42,7 +43,14 @@ public class RadiusDetectionHandler : MonoBehaviour
 
             if (dot >= viewThreshold)
             {
-                HandlePlayerSeen(true, target);
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
+                {
+                    HandlePlayerSeen(true, target);
+                }
+                else
+                {
+                    HandlePlayerSeen(false, target);
+                }
             }
             else
             {

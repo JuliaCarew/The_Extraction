@@ -1,10 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PickUpController : MonoBehaviour
 {
     public bool hasWeapon { get; private set; } = false;
     [SerializeField] private Transform weaponHolder;
-
+    GameObject weaponObj;
     public bool debugMode = true;
 
     private void OnEnable()
@@ -25,7 +26,7 @@ public class PickUpController : MonoBehaviour
         
         if (Pickup.LastPickedUpWeapon != null && weaponHolder != null)
         {
-            GameObject weaponObj = Pickup.LastPickedUpWeapon;
+            weaponObj = Pickup.LastPickedUpWeapon;
             
             // Move weapon to holder and parent it
             weaponObj.transform.position = weaponHolder.position;
@@ -48,5 +49,15 @@ public class PickUpController : MonoBehaviour
         {
             if(debugMode)Debug.LogWarning($"PickUpController: No weapon pickup found or weaponHolder is null. LastPickedUpWeapon: {(Pickup.LastPickedUpWeapon != null ? "exists" : "null")}, weaponHolder: {(weaponHolder != null ? "exists" : "null")}");
         }
+    }
+
+    public void LoseWeapon()
+    {
+        if (weaponObj != null)
+        {
+            weaponObj.transform.SetParent(null);
+            Destroy(weaponObj);
+        }
+        hasWeapon = false;
     }
 }

@@ -10,6 +10,8 @@ public class PlayerEvents : SingletonBase<PlayerEvents>
     public event Action moneyCollected;
     public event Action pickedUpWeapon;
     public event Action playerReset;
+    public event Action playerEnterHidingSpot;
+    public event Action playerExitHidingSpot;
 
     public void PlayerStartedMoving() => StartedMoving?.Invoke();
     public void PlayerStoppedMoving() => StoppedMoving?.Invoke();
@@ -19,4 +21,6 @@ public class PlayerEvents : SingletonBase<PlayerEvents>
     public void MoneyCollected() => moneyCollected?.Invoke();
     public void WeaponPickedUp() => pickedUpWeapon?.Invoke();
     public void PlayerReset() => playerReset?.Invoke();
+    public void PlayerEnterHidingSpot() => playerEnterHidingSpot?.Invoke();
+    public void PlayerExitHidingSpot() => playerExitHidingSpot?.Invoke();
 }

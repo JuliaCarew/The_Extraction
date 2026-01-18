@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class InteractableController : SingletonBase<InteractableController>
 {
@@ -74,7 +75,7 @@ public class InteractableController : SingletonBase<InteractableController>
         }
 
         // Try to find InteractibleUI singleton
-        InteractibleUI interactibleUI = FindObjectOfType<InteractibleUI>();
+        InteractibleUI interactibleUI = FindFirstObjectByType<InteractibleUI>();
         if (interactibleUI != null)
         {
             interactibleTextGameObject = interactibleUI.gameObject;
@@ -97,11 +98,20 @@ public class InteractableController : SingletonBase<InteractableController>
     private void OnEnable()
     {
         input.InteractInputEvent += OnInteract;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDestroy()
     {
         input.InteractInputEvent -= OnInteract;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        EnableMeshes();
+        isHidden = false;
+        pickUpController.LoseWeapon();
     }
     private void Update()
     {
@@ -114,6 +124,7 @@ public class InteractableController : SingletonBase<InteractableController>
         {
             meshRenderer.gameObject.layer = LayerMask.NameToLayer("Hidden");
             meshRenderer.enabled = false;
+            playerSightRange.DisablePlayerSightRadius();
         }
     }
 
@@ -121,6 +132,7 @@ public class InteractableController : SingletonBase<InteractableController>
     {
         foreach (var meshRenderer in meshRenderers)
         {
+            meshRenderer.gameObject.layer = LayerMask.NameToLayer("Player");
             meshRenderer.enabled = true;
         }
     }
@@ -181,6 +193,7 @@ public class InteractableController : SingletonBase<InteractableController>
         if (isHidden)
         {
             StopHiding();
+            PlayerEvents.Instance.PlayerExitHidingSpot();
         }
         else
         {
