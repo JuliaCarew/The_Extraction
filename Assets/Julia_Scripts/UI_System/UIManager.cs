@@ -10,7 +10,8 @@ public enum UIState
     Pause,
     Results,
     GameOver,
-    Settings
+    Settings,
+    Tutorial
 }
 
 public class UIManager : SingletonBase<UIManager>
@@ -161,6 +162,8 @@ public class UIManager : SingletonBase<UIManager>
     public void ShowPause(){ ChangeGameState(GameState.Paused); }
     public void ShowSettings(){ ChangeGameState(GameState.Settings); }
     public void ShowResults(){ ChangeGameState(GameState.Results); }
+
+    public void ShowTutorial() { ChangeGameState(GameState.Tutorial); }
 
     public void Retry()
     {

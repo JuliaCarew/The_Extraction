@@ -67,7 +67,7 @@ public class GameStateMachine : SingletonBase<GameStateMachine>
         if (newState == GameState.Paused || 
         newState == GameState.Menu || 
         newState == GameState.GameOver || 
-        newState == GameState.Results)
+        newState == GameState.Results || newState == GameState.Tutorial)
         {
             if (Time.timeScale != 0f)
             {

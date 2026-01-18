@@ -8,5 +8,6 @@ public enum GameState
     Loading,
     Settings,
     Results,
-    GameOver
+    GameOver,
+    Tutorial
 }

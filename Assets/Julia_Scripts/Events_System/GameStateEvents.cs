@@ -7,6 +7,7 @@ public class GameStateEvents : SingletonBase<GameStateEvents>
     public event Action GameResumed;
     public event Action GameEnded;
     public event Action GameOver;
+    public event Action Tutorial; 
 
     public event Action<GameState> StateChanged;
 
@@ -15,5 +16,7 @@ public class GameStateEvents : SingletonBase<GameStateEvents>
     public void RaiseGameResumed() => GameResumed?.Invoke();
     public void RaiseGameEnded() => GameEnded?.Invoke();
     public void RaiseGameOver() => GameOver?.Invoke();
+
+    public void RaiseTutorial() => Tutorial?.Invoke(); 
     public void RaiseStateChanged(GameState state) => StateChanged?.Invoke(state);
 }
