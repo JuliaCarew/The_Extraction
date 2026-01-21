@@ -54,7 +54,7 @@ public class ActionTextManager : SingletonBase<ActionTextManager>
         // Initialize with the ScriptableObject data
         actionTextDisplay.Initialize(actionTextSO, screenPos);
         
-        // Start animation
+        // Start animation (would need to check if its a hiding spot)
         Debug.Log($"[ActionTextManager] Starting animation coroutine.");
         currentAnimationCoroutine = StartCoroutine(AnimateText(actionTextSO));
         
@@ -104,7 +104,7 @@ public class ActionTextManager : SingletonBase<ActionTextManager>
             yield return null;
         }
         
-        // Fade out
+        // Fade out 
         yield return StartCoroutine(actionTextDisplay.FadeOut(data.fadeOutTime));
         
         // Deactivate after animation
