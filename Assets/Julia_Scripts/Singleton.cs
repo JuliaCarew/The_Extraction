@@ -5,6 +5,8 @@ using UnityEngine;
 /// </summary>
 public class SingletonBase<T> : MonoBehaviour where T : MonoBehaviour
 {
+
+   
     private static T _instance;
     public static T Instance
     {

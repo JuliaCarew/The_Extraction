@@ -178,7 +178,7 @@ public class InteractableController : SingletonBase<InteractableController>
         }
     }
 
-    private bool IsEnemyInteractable()
+    public bool IsEnemyInteractable()
     {
         if (currentInteractable == null)
             return false;
