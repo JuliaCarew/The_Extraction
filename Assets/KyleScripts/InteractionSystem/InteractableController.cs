@@ -7,6 +7,10 @@ public class InteractableController : SingletonBase<InteractableController>
     [SerializeField] private float detectionRadius = 1.5f;
     #region Variables 
 
+    [Header("Action Text Definitions")]
+    [SerializeField] private ActionTextSO killActionData;
+    [SerializeField] private ActionTextSO hideActionData;
+
     [Header("Interaction Detection")]
     [SerializeField] private float detectionDistance = 3f;
     [SerializeField] private LayerMask interactionLayer;
@@ -36,7 +40,7 @@ public class InteractableController : SingletonBase<InteractableController>
     protected override void Awake()
     {
         base.Awake();
-        input = GetComponentInChildren<InputManager>();
+        //input = GetComponentInChildren<InputManager>();
         meshRenderers = GetComponentsInChildren<MeshRenderer>(true);
 
         if (pickUpController == null)
@@ -111,6 +115,7 @@ public class InteractableController : SingletonBase<InteractableController>
         pickUpController.LoseWeapon();
         previousWeaponState = false; // Reset weapon state tracking on scene load
     }
+
     private void Update()
     {
         DetectInteractable();
@@ -221,7 +226,25 @@ public class InteractableController : SingletonBase<InteractableController>
                     return;
                 }
 
+                // Store enemy position before interaction 
+                bool wasEnemy = IsEnemyInteractable();
+                Vector3? enemyPosition = null;
+                if (wasEnemy && killActionData != null)
+                {
+                    enemyPosition = currentInteractable.transform.position;
+                }              
+
                 currentInteractable.Interact();
+
+                // Show kill action text if enemy was killed
+                if (wasEnemy)
+                {
+                    if (killActionData != null && enemyPosition.HasValue && ActionTextManager.Instance != null)
+                    {
+                        Debug.Log($"[InteractableController] Calling ShowActionText for kill at position: {enemyPosition.Value}");
+                        ActionTextManager.Instance.ShowActionText(killActionData, enemyPosition.Value);
+                    }
+                }
             }
         }
     }
@@ -238,6 +261,13 @@ public class InteractableController : SingletonBase<InteractableController>
         if (interactibleUI != null)
         {
             interactibleUI.SetActive(false);
+        }
+
+        // Show hide action text 
+        if (hideActionData != null && ActionTextManager.Instance != null)
+        {
+            Debug.Log($"[InteractableController] Calling ShowActionText for hide (screen center)");
+            ActionTextManager.Instance.ShowActionText(hideActionData, null);
         }
     }
 
