@@ -8,10 +8,13 @@ public class GameplayState : GameStateSO
         Time.timeScale = 1f;
         GameStateEvents.Instance.RaiseGameResumed();
         Debug.Log("entered Gameplay state");
+        // Good for now but in future will grab current track from level manager.
+        AudioLibrary.Instance.PlayMusic("GameplayMusic");
     }
 
     public override void Exit()
     {
+        AudioLibrary.Instance.StopMusic();
     }
 
     public override void Update()

@@ -11,10 +11,12 @@ public class MenuState : GameStateSO
         {
             GameStateEvents.Instance.RaiseGameStarted();
         }
+        AudioLibrary.Instance.PlayMusic("MainMenu");
     }
 
     public override void Exit()
     {
+        AudioLibrary.Instance.StopMusic();
     }
 
     public override void Update()
