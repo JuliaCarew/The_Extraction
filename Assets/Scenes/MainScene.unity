@@ -2992,6 +2992,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3066818092879682021, guid: 51fd05ed2f6ddb84da045735668e5b59, type: 3}
+      propertyPath: movSpeed
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066818092879682021, guid: 51fd05ed2f6ddb84da045735668e5b59, type: 3}
       propertyPath: spawnpoint
       value: 
       objectReference: {fileID: 729489518}
@@ -6433,6 +6437,10 @@ MonoBehaviour:
   library: {fileID: 11400000, guid: 8d0f8ccb31ff432449df51e1451a0a66, type: 2}
   musicSource: {fileID: 1837129774}
   sfxSource: {fileID: 311868117}
+  slowSpeedMultiplier: 0.75
+  slowVolumeMultiplier: 0.75
+  normalSpeedMultiplier: 1
+  normalVolumeMultiplier: 1
   debugMode: 1
 --- !u!1001 &853744291
 PrefabInstance:

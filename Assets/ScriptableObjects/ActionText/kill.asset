@@ -19,6 +19,6 @@ MonoBehaviour:
   fadeInTime: 0.2
   fadeOutTime: 0.3
   moveOffset: {x: 0, y: 50}
-  soundEffect: {fileID: 8300000, guid: ec84ec10fd89b814da6ddeee59e114cc, type: 3}
+  soundEffect: {fileID: 8300000, guid: 4cfb946fa21e53142ba87ef56ebbc249, type: 3}
   showIcon: 1
   showText: 1
