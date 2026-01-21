@@ -10,9 +10,16 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
 
+    [Header("Music Intensity Settings")]
+    [SerializeField] private float slowSpeedMultiplier = 0.75f;
+    [SerializeField] private float slowVolumeMultiplier = 0.75f;
+    [SerializeField] private float normalSpeedMultiplier = 1.0f;
+    [SerializeField] private float normalVolumeMultiplier = 1.0f;
+
     private AudioPlayer musicPlayer;
     private AudioPlayer sfxPlayer;
     public bool debugMode = false;
+    private float baseMusicVolume = 1.0f;
 
     // Store delegate references for UI events to prevent duplicate subscriptions
     private Action uiHoverHandler;
@@ -24,6 +31,9 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
 
         musicPlayer = new AudioPlayer(musicSource);
         sfxPlayer = new AudioPlayer(sfxSource);
+
+        // Store base volume for intensity changes
+        baseMusicVolume = musicSource.volume;
 
         // Initialize UI delegate references
         uiHoverHandler = () => PlaySound(SoundId.UiHover);
@@ -97,6 +107,7 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
 
             case GameState.Gameplay:
                 PlayMusic(SoundId.Gameplay);
+                SetMusicIntensity(slowSpeedMultiplier, slowVolumeMultiplier);
                 break;
 
             case GameState.Paused:
@@ -129,7 +140,8 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
 
     public void SetMusicVolume(float value) // for UI sliders
     {
-        musicSource.volume = Mathf.Clamp01(value);
+        baseMusicVolume = Mathf.Clamp01(value);
+        musicSource.volume = baseMusicVolume;
 
         if (debugMode)
             Debug.Log($"Music volume set to {musicSource.volume}");
@@ -141,5 +153,25 @@ public class AudioManager : SingletonBase<AudioManager>, IAudioService
 
         if (debugMode)
             Debug.Log($"SFX volume set to {sfxSource.volume}");
+    }
+
+    // adjusts speed and volume of music for intensity changes
+    public void SetMusicIntensity(float speedMultiplier, float volumeMultiplier)
+    {
+        if (musicSource == null) return;
+
+        musicSource.pitch = Mathf.Clamp(speedMultiplier, 0.1f, 2.0f);
+        musicSource.volume = baseMusicVolume * Mathf.Clamp01(volumeMultiplier);
+
+        if (debugMode)
+            Debug.Log($"Music intensity set - Speed: {musicSource.pitch}, Volume: {musicSource.volume}");
+    }
+
+    // called when player picks up a weapon, sets music to normal intensity
+    public void OnWeaponPickedUp()
+    {
+        SetMusicIntensity(normalSpeedMultiplier, normalVolumeMultiplier);
+        if (debugMode)
+            Debug.Log("Music intensity set to normal (weapon picked up)");
     }
 }

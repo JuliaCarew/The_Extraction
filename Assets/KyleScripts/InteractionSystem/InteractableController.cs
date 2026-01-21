@@ -32,6 +32,7 @@ public class InteractableController : SingletonBase<InteractableController>
     private string originalPrompt = "";
     [SerializeField] private PlayerSightRange playerSightRange;
     private Collider[] interactionResults = new Collider[5];
+    private bool previousWeaponState = false;
 
     public bool hasWeapon => pickUpController != null && pickUpController.hasWeapon;
     #endregion
@@ -112,10 +113,29 @@ public class InteractableController : SingletonBase<InteractableController>
         EnableMeshes();
         isHidden = false;
         pickUpController.LoseWeapon();
+        previousWeaponState = false; // Reset weapon state tracking on scene load
     }
     private void Update()
     {
         DetectInteractable();
+        CheckWeaponStateChange();
+    }
+
+    // Checks if weapon state has changed and notifies AudioManager when weapon is picked up
+    private void CheckWeaponStateChange()
+    {
+        bool currentWeaponState = hasWeapon;
+        
+        // Detect when weapon is picked up
+        if (!previousWeaponState && currentWeaponState)
+        {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.OnWeaponPickedUp();
+            }
+        }
+        
+        previousWeaponState = currentWeaponState;
     }
 
     private void DisableMeshes()
@@ -280,4 +300,3 @@ public class InteractableController : SingletonBase<InteractableController>
         Gizmos.DrawWireSphere(detectionCenter, detectionRadius);
     }
 }
-
