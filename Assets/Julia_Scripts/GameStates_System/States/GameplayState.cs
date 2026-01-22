@@ -8,6 +8,8 @@ public class GameplayState : GameStateSO
         Time.timeScale = 1f;
         GameStateEvents.Instance.RaiseGameResumed();
         Debug.Log("entered Gameplay state");
+        AudioManager.Instance.SetMusicIntensity(0.75f, 0.75f);
+        AudioManager.Instance.PlayMusic("GameplayMusic");
     }
 
     public override void Exit()

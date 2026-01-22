@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Game States/Menu")]
-public class MenuState : GameStateSO
+public class MenuState : StateSO
 {
     public override void Enter()
     {
@@ -11,6 +11,8 @@ public class MenuState : GameStateSO
         {
             GameStateEvents.Instance.RaiseGameStarted();
         }
+        AudioManager.Instance.PlayMusic("MainMenu");
+        Debug.Log("Attempting to play main menu music.");
     }
 
     public override void Exit()

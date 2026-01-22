@@ -62,7 +62,7 @@ public class RadiusDetectionHandler : MonoBehaviour
     private void HandlePlayerHeard()
     {
         // TODO: Move enemy towards sound source slightly.
-        Debug.Log("Hearing player.");
+        //Debug.Log("Hearing player.");
 
     }
 
@@ -75,7 +75,7 @@ public class RadiusDetectionHandler : MonoBehaviour
             return;
         }
         float distanceToTarget = Vector3.Distance(transform.position, target.position);
-        Debug.Log("Detecting player.");
+        //Debug.Log("Detecting player.");
         if (GameStateMachine.Instance.GetCurrentState() == GameState.Gameplay)
         {
             EnemyEvents.Instance.EnemyDetectionChanged(0.1f);

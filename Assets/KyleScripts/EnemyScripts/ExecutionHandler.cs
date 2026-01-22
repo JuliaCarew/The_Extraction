@@ -12,7 +12,10 @@ public class ExecutionHandler : MonoBehaviour, IKillable
 
     private void OnDestroy()
     {
-        EnemyEvents.Instance.OnEnemyDetectionChanged -= UpdateAwarenessLevel;
+        if (EnemyEvents.Instance != null)
+        {
+            EnemyEvents.Instance.OnEnemyDetectionChanged -= UpdateAwarenessLevel;
+        }
     }
 
     private void UpdateAwarenessLevel(float newAwareness)

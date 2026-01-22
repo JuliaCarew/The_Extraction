@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerSightRange : MonoBehaviour
 {
@@ -17,12 +18,19 @@ public class PlayerSightRange : MonoBehaviour
     {
         EnemyEvents.Instance.SpottedPlayer += EnablePlayerSightRadius;
         EnemyEvents.Instance.LostPlayer += DisablePlayerSightRadius;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        DisablePlayerSightRadius();
     }
 
     private void OnDisable()
     {
         EnemyEvents.Instance.SpottedPlayer -= EnablePlayerSightRadius;
         EnemyEvents.Instance.LostPlayer -= DisablePlayerSightRadius;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     public void EnablePlayerSightRadius()

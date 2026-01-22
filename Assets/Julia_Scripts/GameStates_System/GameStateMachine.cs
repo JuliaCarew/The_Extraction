@@ -6,15 +6,15 @@ public class GameStateMachine : SingletonBase<GameStateMachine>
     [Header("States")]
     [SerializeField] private List<GameStateSO> availableStates;
 
-    private Dictionary<GameState, IState> states;
-    private IState currentState;
+    private Dictionary<GameState, GameStateSO> states;
+    private GameStateSO currentState;
     public bool debugMode = false;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
 
-        states = new Dictionary<GameState, IState>();
+        states = new Dictionary<GameState, GameStateSO>();
 
         foreach (var state in availableStates)
         {
