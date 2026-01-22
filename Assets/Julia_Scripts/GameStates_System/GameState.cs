@@ -9,5 +9,7 @@ public enum GameState
     Settings,
     Results,
     GameOver,
+    Shop,
+    LevelSelect,
     Tutorial
 }

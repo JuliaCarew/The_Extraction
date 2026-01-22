@@ -11,6 +11,8 @@ public enum UIState
     Results,
     GameOver,
     Settings,
+    Shop,
+    LevelSelect,
     Tutorial
 }
 
