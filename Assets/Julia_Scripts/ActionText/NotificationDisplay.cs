@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
-public class ActionTextDisplay : MonoBehaviour
+public class NotificationDisplay : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textComponent;
     [SerializeField] private Image iconComponent;
@@ -24,7 +24,7 @@ public class ActionTextDisplay : MonoBehaviour
         }
     }
     
-    public void Initialize(ActionTextSO data, Vector2 screenPosition)
+    public void Initialize(NotificationSO data, Vector2 screenPosition)
     {
         // Set text 
         if (textComponent != null)
@@ -32,7 +32,14 @@ public class ActionTextDisplay : MonoBehaviour
             if (data.showText)
             {
                 // Force set the text and color
-                textComponent.text = data.displayText ?? "";
+                if (data.displayText != null)
+                {
+                    textComponent.text = data.displayText;
+                }
+                else
+                {
+                    textComponent.text = "";
+                }
                 textComponent.color = data.textColor;
                 
                 // Force UI update
@@ -40,12 +47,12 @@ public class ActionTextDisplay : MonoBehaviour
                 Canvas.ForceUpdateCanvases();
                 
                 textComponent.gameObject.SetActive(true);
-                Debug.Log($"[ActionTextDisplay] Text set: '{textComponent.text}' (from data: '{data.displayText}'), Color: {textComponent.color} (from data: {data.textColor}), ShowText: {data.showText}");
+                Debug.Log($"[NotificationDisplay] Text set: '{textComponent.text}' (from data: '{data.displayText}'), Color: {textComponent.color} (from data: {data.textColor}), ShowText: {data.showText}");
             }
             else
             {
                 textComponent.gameObject.SetActive(false);
-                Debug.Log($"[ActionTextDisplay] Text component disabled (showText: {data.showText})");
+                Debug.Log($"[NotificationDisplay] Text component disabled (showText: {data.showText})");
             }
         }
         
@@ -62,12 +69,12 @@ public class ActionTextDisplay : MonoBehaviour
                 Canvas.ForceUpdateCanvases();
                 
                 iconComponent.gameObject.SetActive(true);
-                Debug.Log($"[ActionTextDisplay] Icon set: {iconComponent.sprite.name} (from data: {data.icon.name}), ShowIcon: {data.showIcon}");
+                Debug.Log($"[NotificationDisplay] Icon set: {iconComponent.sprite.name} (from data: {data.icon.name}), ShowIcon: {data.showIcon}");
             }
             else
             {
                 iconComponent.gameObject.SetActive(false);
-                Debug.Log($"[ActionTextDisplay] Icon component disabled (showIcon: {data.showIcon}, icon: {data.icon != null})");
+                Debug.Log($"[NotificationDisplay] Icon component disabled (showIcon: {data.showIcon}, icon: {data.icon != null})");
             }
         }
         
@@ -75,20 +82,20 @@ public class ActionTextDisplay : MonoBehaviour
         if (rectTransform != null)
         {
             rectTransform.position = screenPosition;
-            Debug.Log($"[ActionTextDisplay] Position set to: {screenPosition}, RectTransform position: {rectTransform.position}");
+            Debug.Log($"[NotificationDisplay] Position set to: {screenPosition}, RectTransform position: {rectTransform.position}");
         }
         
         // Reset alpha
         if (canvasGroup != null)
         {
             canvasGroup.alpha = 0f;
-            Debug.Log($"[ActionTextDisplay] CanvasGroup alpha reset to 0");
+            Debug.Log($"[NotificationDisplay] CanvasGroup alpha reset to 0");
         }
     }
     
     public IEnumerator FadeIn(float duration)
     {
-        Debug.Log($"[ActionTextDisplay] FadeIn started - duration: {duration}, GameObject: {gameObject.name}");
+        Debug.Log($"[NotificationDisplay] FadeIn started - duration: {duration}, GameObject: {gameObject.name}");
         float elapsed = 0f;
         while (elapsed < duration)
         {

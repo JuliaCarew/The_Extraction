@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 38639978}
   - component: {fileID: 38639979}
   m_Layer: 0
-  m_Name: ActionTextManager
+  m_Name: NotificationManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +164,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1238997368}
+  - {fileID: 630303175}
   m_Father: {fileID: 961710619}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &38639979
@@ -179,8 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442cc859a1518c340a68ccf50f10d657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionTextDisplay: {fileID: 0}
-  canvasTransform: {fileID: 0}
+  notificationDisplay: {fileID: 460348562}
+  canvasTransform: {fileID: 460348561}
   audioSource: {fileID: 311868117}
 --- !u!4 &39056933 stripped
 Transform:
@@ -3562,7 +3564,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 148546833000682192, guid: 33da47bc094f7534f8eac93b53bd6b67, type: 3}
       propertyPath: m_Name
-      value: ActionText
+      value: 'NotificationDisplay '
       objectReference: {fileID: 0}
     - target: {fileID: 148546833000682192, guid: 33da47bc094f7534f8eac93b53bd6b67, type: 3}
       propertyPath: m_IsActive
@@ -3666,6 +3668,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8172673175372006743, guid: 33da47bc094f7534f8eac93b53bd6b67, type: 3}
   m_PrefabInstance: {fileID: 460348560}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &460348562 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1413466864868996000, guid: 33da47bc094f7534f8eac93b53bd6b67, type: 3}
+  m_PrefabInstance: {fileID: 460348560}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd7723935698454da0cad7627fb5986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &470163497
 GameObject:
   m_ObjectHideFlags: 0
@@ -4449,6 +4462,52 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &630303174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 630303175}
+  - component: {fileID: 630303176}
+  m_Layer: 0
+  m_Name: OnWeaponPickUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &630303175
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630303174}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 38639978}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &630303176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630303174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573b54d8fef4f644582ec26bc3bc441f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPickupNotificationSO: {fileID: 11400000, guid: f1cdbf9d3d15b844f917729396d6f8a1, type: 2}
+  usePickupPosition: 0
 --- !u!1001 &637716019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9050,6 +9109,52 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6179538828658656863, guid: fabe5da10692178448d46bfb13812b75, type: 3}
   m_PrefabInstance: {fileID: 1222818249}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1238997367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1238997368}
+  - component: {fileID: 1238997369}
+  m_Layer: 0
+  m_Name: OnKill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1238997368
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238997367}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 38639978}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1238997369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238997367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c15ed06e62f6c459ac0d518b2b7c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killNotificationSO: {fileID: 11400000, guid: ff2084f9d5f1da448a4ea3273c844ca6, type: 2}
+  useEnemyPosition: 1
 --- !u!43 &1258374988
 Mesh:
   m_ObjectHideFlags: 0

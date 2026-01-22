@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    [Header("Action Text Definitions")]
-    [SerializeField] private ActionTextSO weaponPickupActionData;
-
     [SerializeField] public PickupType type;
     public static GameObject LastPickedUpWeapon { get; set; }
     public bool debugMode = false;
@@ -51,16 +48,6 @@ public class Pickup : MonoBehaviour
                 LastPickedUpWeapon = gameObject;
                 PlayerEvents.Instance.WeaponPickedUp();
                 if (debugMode) Debug.Log($"Pickup: WeaponPickedUp() called, LastPickedUpWeapon = {(LastPickedUpWeapon != null ? LastPickedUpWeapon.name : "null")}");
-
-                // Show weapon pickup action text
-                if (weaponPickupActionData != null && ActionTextManager.Instance != null)
-                {
-                    ActionTextManager.Instance.ShowActionText(weaponPickupActionData, playerObject.transform.position);
-                }
-                else
-                {
-                    Debug.LogWarning($"Pickup: Cannot show weapon pickup action text - weaponPickupActionData: {weaponPickupActionData != null}, ActionTextManager.Instance: {ActionTextManager.Instance != null}");
-                }
             }
         }
         else

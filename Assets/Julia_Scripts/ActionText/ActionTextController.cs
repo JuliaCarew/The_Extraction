@@ -1,64 +1,44 @@
 using UnityEngine;
 
-// only responsible for showing action text
+// can be removed
 public class ActionTextController : MonoBehaviour
 {
-    [Header("Action Text Definitions")]
-    [SerializeField] private ActionTextSO killActionData;
-    [SerializeField] private ActionTextSO hideActionData;
+    [Header("Notification Definitions (Legacy)")]
+    [SerializeField] private NotificationSO killNotificationSO;
+    [SerializeField] private NotificationSO hideNotificationSO;
 
-    BaseInteractable currentInteract = InteractableController.Instance.currentInteractable;
+    [Header("Optional References")]
+    [SerializeField] private MonoBehaviour interactableControllerRef; // Generic reference if needed
 
-    private void Update()
+    public void ShowKillNotification(Vector3 enemyPosition, bool hasEnemyPosition)
     {
-        if (currentInteract == null)
-            return;
-        else
-            DetectInteractForActionText();
-    }
-
-    void DetectInteractForActionText()
-    {
-        if (currentInteract.gameObject.CompareTag("Enemy"))
+        if (killNotificationSO != null && NotificationManager.Instance != null)
         {
-            KillActionText();
-            Debug.Log("[InteractableController] current interactible tagged Enemy");
-        }
-        else if (currentInteract.gameObject.CompareTag("Hide"))
-        {
-            HideActionText();
-            Debug.Log("[InteractableController] current interactible tagged Hide");
+            NotificationManager.Instance.ShowNotification(killNotificationSO, enemyPosition, hasEnemyPosition);
         }
     }
 
-    void KillActionText()
+    public void ShowKillNotification()
     {
-        // Store enemy position before interaction 
-        bool wasEnemy = InteractableController.Instance.IsEnemyInteractable();
-        Vector3? enemyPosition = null;
-        if (wasEnemy && killActionData != null)
-        {
-            enemyPosition = currentInteract.transform.position;
-        }
+        Vector3 dummyPosition = Vector3.zero;
+        ShowKillNotification(dummyPosition, false);
+    }
 
-        // Show kill action text if enemy was killed
-        if (wasEnemy)
+    public void ShowHideNotification()
+    {
+        if (hideNotificationSO != null && NotificationManager.Instance != null)
         {
-            if (killActionData != null && enemyPosition.HasValue && ActionTextManager.Instance != null)
-            {
-                Debug.Log($"[InteractableController] Calling ShowActionText for kill");
-                ActionTextManager.Instance.ShowActionText(killActionData, null);
-            }
+            NotificationManager.Instance.ShowNotification(hideNotificationSO);
         }
     }
 
-    void HideActionText()
+    public void OnEnemyKilled(Vector3 enemyPosition)
     {
-        if (hideActionData != null && ActionTextManager.Instance != null)
-        {
-            Debug.Log($"[InteractableController] Calling ShowActionText for hide (screen center)");
-            ActionTextManager.Instance.ShowActionText(hideActionData, null);
-            // need to keep showing when hiding 
-        }
+        ShowKillNotification(enemyPosition, true);
+    }
+
+    public void OnHideSpotEntered()
+    {
+        ShowHideNotification();
     }
 }

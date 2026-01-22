@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1413466864868996000}
   - component: {fileID: 4077201321531207521}
   m_Layer: 0
-  m_Name: ActionText
+  m_Name: 'NotificationDisplay '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
