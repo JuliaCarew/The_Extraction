@@ -4,10 +4,8 @@ public class NotificationTrigger : MonoBehaviour
 {
     [Header("Notification Settings")]
     [SerializeField] private NotificationSO notificationSO;
-    [SerializeField] private bool useWorldPosition = false;
 
-    
-    public void TriggerNotification(Vector3 worldPosition, bool hasWorldPosition)
+    public void TriggerNotification()
     {
         if (notificationSO == null)
         {
@@ -17,41 +15,11 @@ public class NotificationTrigger : MonoBehaviour
 
         if (NotificationManager.Instance != null)
         {
-            Vector3 position = Vector3.zero;
-            bool hasPosition = false;
-            if (useWorldPosition && hasWorldPosition)
-            {
-                position = worldPosition;
-                hasPosition = true;
-            }
-            NotificationManager.Instance.ShowNotification(notificationSO, position, hasPosition);
+            NotificationManager.Instance.ShowNotification(notificationSO);
         }
         else
         {
             Debug.LogError("[NotificationTrigger] NotificationManager instance not found!");
         }
-    }
-
-    public void TriggerNotification()
-    {
-        Vector3 dummyPosition = Vector3.zero;
-        TriggerNotification(dummyPosition, false);
-    }
-
-    public void TriggerNotificationAtThisPosition()
-    {
-        if (useWorldPosition)
-        {
-            TriggerNotification(transform.position, true);
-        }
-        else
-        {
-            TriggerNotification();
-        }
-    }
-
-    public void TriggerNotificationAtCenter()
-    {
-        TriggerNotification();
     }
 }

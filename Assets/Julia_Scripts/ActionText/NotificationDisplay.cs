@@ -31,7 +31,7 @@ public class NotificationDisplay : MonoBehaviour
         {
             if (data.showText)
             {
-                // Force set the text and color
+                // Set text and color
                 if (data.displayText != null)
                 {
                     textComponent.text = data.displayText;
@@ -42,7 +42,6 @@ public class NotificationDisplay : MonoBehaviour
                 }
                 textComponent.color = data.textColor;
                 
-                // Force UI update
                 textComponent.SetAllDirty();
                 Canvas.ForceUpdateCanvases();
                 
@@ -52,7 +51,6 @@ public class NotificationDisplay : MonoBehaviour
             else
             {
                 textComponent.gameObject.SetActive(false);
-                Debug.Log($"[NotificationDisplay] Text component disabled (showText: {data.showText})");
             }
         }
         
@@ -62,19 +60,17 @@ public class NotificationDisplay : MonoBehaviour
             if (data.showIcon && data.icon != null)
             {
                 iconComponent.sprite = data.icon;
-                iconComponent.color = Color.white; // Ensure icon is visible
+                iconComponent.color = Color.white; 
                 
                 // Force UI update
                 iconComponent.SetAllDirty();
                 Canvas.ForceUpdateCanvases();
                 
                 iconComponent.gameObject.SetActive(true);
-                Debug.Log($"[NotificationDisplay] Icon set: {iconComponent.sprite.name} (from data: {data.icon.name}), ShowIcon: {data.showIcon}");
             }
             else
             {
                 iconComponent.gameObject.SetActive(false);
-                Debug.Log($"[NotificationDisplay] Icon component disabled (showIcon: {data.showIcon}, icon: {data.icon != null})");
             }
         }
         
@@ -89,13 +85,11 @@ public class NotificationDisplay : MonoBehaviour
         if (canvasGroup != null)
         {
             canvasGroup.alpha = 0f;
-            Debug.Log($"[NotificationDisplay] CanvasGroup alpha reset to 0");
         }
     }
     
     public IEnumerator FadeIn(float duration)
     {
-        Debug.Log($"[NotificationDisplay] FadeIn started - duration: {duration}, GameObject: {gameObject.name}");
         float elapsed = 0f;
         while (elapsed < duration)
         {

@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a9fdde8d8ccc054485ed9eb548ab080, type: 3}
-  m_Name: weaponPickUp
+  m_Name: Notif_hide
   m_EditorClassIdentifier: 
-  displayText: Got a weapon!
-  icon: {fileID: 21300000, guid: fa6a08d8f2bdf9b45b1fce8da2c0deef, type: 3}
+  displayText: Hiding
+  icon: {fileID: 21300000, guid: c4a87042649615a44af53c5c97042eac, type: 3}
   textColor: {r: 1, g: 1, b: 1, a: 1}
-  displayDuration: 1
+  positionType: 0
+  customPosition: {x: 0.5, y: 0.5}
+  displayDuration: 2
   fadeInTime: 0.2
-  fadeOutTime: 0.3
+  fadeOutTime: 0.5
   moveOffset: {x: 0, y: 50}
-  soundEffect: {fileID: 8300000, guid: 3e2feca45ffabb04dbfcf37dc9f45532, type: 3}
+  soundEffect: {fileID: 8300000, guid: dce0a3ffa8e757746bf0392eb638c0ae, type: 3}
   showIcon: 1
   showText: 1

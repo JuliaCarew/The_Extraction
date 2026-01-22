@@ -11,7 +11,6 @@ public class NotificationSO : ScriptableObject
     [Header("Position Settings")]
     public NotificationPosition positionType = NotificationPosition.ScreenCenter;
     public Vector2 customPosition = new Vector2(0.5f, 0.5f); // Normalized screen position (0-1)
-    public bool useWorldPosition = false; // If true, position will be provided at runtime
 
     [Header("Animation Settings")]
     public float displayDuration = 2.0f;
@@ -20,7 +19,7 @@ public class NotificationSO : ScriptableObject
     public Vector2 moveOffset = new Vector2(0, 50);
 
     [Header("Sound")]
-    public AudioClip soundEffect; // Optional sound effect
+    public AudioClip soundEffect; 
 
     [Header("Display Type")]
     public bool showIcon = true;
