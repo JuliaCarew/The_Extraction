@@ -39,11 +39,17 @@ public class ScoreManager : SingletonBase<ScoreManager>
     {
         // Unsubscribe from stuff here.
         //PlayerEvents.Instance.RoomCleared -= () => RoomCleared(0f);
-        PlayerEvents.Instance.toothCollected -= CollectTooth;
-        PlayerEvents.Instance.moneyCollected -= CollectMoney;
-        EnemyEvents.Instance.EnemyDiedWithDetection -= OnEnemyDiedWithDetection;
-        EnemyEvents.Instance.OnEnemyKilled -= EnemyKilled;
-        EnemyEvents.Instance.OnEnemyDetectionChanged -= UpdateDetection;
+        if (PlayerEvents.Instance != null)
+        {
+            PlayerEvents.Instance.toothCollected -= CollectTooth;
+            PlayerEvents.Instance.moneyCollected -= CollectMoney;
+        }
+        if (EnemyEvents.Instance != null)
+        {
+            EnemyEvents.Instance.EnemyDiedWithDetection -= OnEnemyDiedWithDetection;
+            EnemyEvents.Instance.OnEnemyKilled -= EnemyKilled;
+            EnemyEvents.Instance.OnEnemyDetectionChanged -= UpdateDetection;
+        }
     }
 
 
